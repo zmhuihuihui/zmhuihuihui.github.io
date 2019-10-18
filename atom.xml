@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>灰灰灰灰</title>
+  
+  <subtitle>面向信仰编程</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-10-18T11:45:35.335Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>zmh</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring之IOC思想</title>
+    <link href="http://yoursite.com/2019/10/18/Spring%E4%B9%8BIOC/"/>
+    <id>http://yoursite.com/2019/10/18/Spring之IOC/</id>
+    <published>2019-10-18T06:57:01.925Z</published>
+    <updated>2019-10-18T11:45:35.335Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Spring的IOC&quot;&gt;&lt;a href=&quot;#Spring的IOC&quot; class=&quot;headerlink&quot; title=&quot;Spring的IOC&quot;&gt;&lt;/a&gt;Spring的IOC&lt;/h2&gt;&lt;p&gt;IOC（Inversion of
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Spring" scheme="http://yoursite.com/categories/Spring/"/>
+    
+    
+      <category term="Spirng" scheme="http://yoursite.com/tags/Spirng/"/>
+    
+      <category term="IOC" scheme="http://yoursite.com/tags/IOC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/10/17/hello-world/"/>
+    <id>http://yoursite.com/2019/10/17/hello-world/</id>
+    <published>2019-10-17T14:48:49.546Z</published>
+    <updated>2019-10-17T14:48:49.546Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
