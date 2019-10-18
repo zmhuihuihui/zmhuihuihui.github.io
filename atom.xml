@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-18T14:22:07.479Z</updated>
+  <updated>2019-10-18T14:27:30.100Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/10/18/spring-zhi-di/"/>
     <id>http://yoursite.com/2019/10/18/spring-zhi-di/</id>
     <published>2019-10-18T12:53:08.000Z</published>
-    <updated>2019-10-18T14:22:07.479Z</updated>
+    <updated>2019-10-18T14:27:30.100Z</updated>
     
     <summary type="html">
     
@@ -39,7 +39,9 @@
       <category term="Spring" scheme="http://yoursite.com/categories/Spring/"/>
     
     
-      <category term="-Spring -DI" scheme="http://yoursite.com/tags/Spring-DI/"/>
+      <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
+    
+      <category term="DI" scheme="http://yoursite.com/tags/DI/"/>
     
   </entry>
   
@@ -48,7 +50,7 @@
     <link href="http://yoursite.com/2019/10/18/spring-zhi-ioc/"/>
     <id>http://yoursite.com/2019/10/18/spring-zhi-ioc/</id>
     <published>2019-10-18T06:57:01.925Z</published>
-    <updated>2019-10-18T13:23:51.911Z</updated>
+    <updated>2019-10-18T14:31:27.456Z</updated>
     
     <summary type="html">
     

@@ -480,7 +480,7 @@
 <span class="token punctuation">}</span></code></pre>
 <p>这样就可以解决上述的问题，张三今天想开什么车，就new一个车，然后回家，省去了在ZhangSan类中进行修改。但还有问题，张三每天想开不同的车就得new不同的车，他嫌太麻烦。他想可不可以每天公司下面停着自己的所有车，下班想开哪一辆开哪一辆。<br>这时引出了本文的主题IOC。我们可以把对象事先存放在Spring容器中（先把所有车停到公司下面），然后当我们需要某个对象时直接从Spring容器中取（下班后取一辆车）。这样就不用每次频繁的修改源代码new不同的对象了。此时再回过头来谈谈什么是IOC（控制反转）。</p>
 <h3 id="再谈IOC"><a href="#再谈IOC" class="headerlink" title="再谈IOC"></a>再谈IOC</h3><p>控制反转即将对象的控制权交由Spring容器处理。在传统的开发模式下，我们往往会自己new对象，此时对象的控制权在程序员手中，什么时候需要用直接new一个就行。而有了Spring IOC，程序员不需要自己手动new对象，Spring会把所有对象创建好放到了一个容器中，由Spring Bean进行统一管理，程序员想用直接拿就好了。<br>由此可以看出Spring的核心思想控制反转，对象的控制权由程序员转变到了Spring，程序员再也不用关心创建对象的过程，只需要关注对象的使用就行。同样再上述例子中，也可以抽象出Person类，实现不同的人开不同的车回家。</p>
-<p>那么Spring框架是如何实现IOC思想的呢，将在下一小节详细描述。</p>
+<p>那么Spring框架是如何实现IOC思想的呢，将在<a href="https://zmhuihuihui.github.io/2019/10/18/spring-zhi-di/" target="_blank" rel="noopener">下一小节</a>详细描述。</p>
 
             </div>
             <hr/>
@@ -887,8 +887,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring-DI/">
-                        <span class="chip bg-color">-Spring -DI</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/DI/">
+                        <span class="chip bg-color">DI</span>
                     </a>
                     
                 </div>

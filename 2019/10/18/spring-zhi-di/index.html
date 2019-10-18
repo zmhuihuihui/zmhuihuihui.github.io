@@ -359,8 +359,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Spring-DI/">
-                                <span class="chip bg-color">-Spring -DI</span>
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
+                            </a>
+                        
+                            <a href="/tags/DI/">
+                                <span class="chip bg-color">DI</span>
                             </a>
                         
                     </div>
@@ -409,14 +413,14 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="Spring中的DI"><a href="#Spring中的DI" class="headerlink" title="Spring中的DI"></a>Spring中的DI</h2><p>在<a href="https://zmhuihuihui.github.io/2019/10/18/spring-zhi-ioc/" target="_blank" rel="noopener">上一小节</a>中，我们阐述了Spring中的核心思想IOC，那么在Spring中是如何实现IOC思想的呢？<br>在Spring中通过DI（依赖注入）的方式来实现IOC思想的。那何为依赖注入呢？即指Spring容器通过Spring Bean对象来创建和维护对象之间的依赖关系，通过DI将对象的依赖关系动态的注入到对象中去，粗略的讲Spring Bean负责创建管理对象，DI负责对象的初始化。</p>
-<h3 id="Bean创建对象"><a href="#Bean创建对象" class="headerlink" title="Bean创建对象"></a>Bean创建对象</h3><p>Spring Bean是在Spring框架运行时所管理的对象，是Spring应用程序的基本构件块。Spring框架中BeanFactory负责创建并维护Bean实例，将系统配置和依赖关系从代码中独立了出来。在实际操作我们应该指定将哪些类用作Bean交由Spring管理，并不是所有类都要交由Spring管理。其对类的具体管理包括：</p>
+<h3 id="Soring-Bean对象"><a href="#Soring-Bean对象" class="headerlink" title="Soring Bean对象"></a>Soring Bean对象</h3><p>Spring Bean是在Spring框架运行时所管理的对象，是Spring应用程序的基本构件块。Spring框架中BeanFactory负责创建并维护Bean实例，将系统配置和依赖关系从代码中独立了出来。在实际操作我们应该指定将哪些类用作Bean交由Spring管理，并不是所有类都要交由Spring管理。其对类的具体管理包括：</p>
 <ul>
 <li>创建一个对象</li>
 <li>通过依赖注入提供依赖项</li>
 <li>拦截方法调用以提供额外的框架功能</li>
 <li>销毁一个对象</li>
 </ul>
-<p>那么接下来就来看看Spring是如何实现IOC和DI的。首先，看一下整个项目的整体框架。<br><img src="/2019/10/18/spring-zhi-di/1.png" alt="项目框架"></p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>那么接下来就来看看Spring是如何实现IOC和DI的。首先，看一下整个项目的整体框架。<br><img src="/2019/10/18/spring-zhi-di/1.png" alt="项目框架"></p>
 <ul>
 <li>entity目录，存放实体类，分别有Car抽象类和Person抽象类。</li>
 <li>CarImpl目录和PersonImpl目录，分别存放Car的实现类和Person的实现类。</li>
@@ -617,8 +621,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Spring-DI/">
-                                    <span class="chip bg-color">-Spring -DI</span>
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
+                                </a>
+                            
+                                <a href="/tags/DI/">
+                                    <span class="chip bg-color">DI</span>
                                 </a>
                             
                         </div>
@@ -957,8 +965,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring-DI/">
-                        <span class="chip bg-color">-Spring -DI</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/DI/">
+                        <span class="chip bg-color">DI</span>
                     </a>
                     
                 </div>
