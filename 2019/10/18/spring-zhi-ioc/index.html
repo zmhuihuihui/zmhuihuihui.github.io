@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 灰灰灰灰">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="Spring之IOC思想, 灰灰灰灰">
+    <meta name="description" content="Spring中的IOCIOC（Inversion of Control），其名称是控制反转，是一种重要的设计思想,实现了程序设计的松耦合。其分为两个部分控制与反转，那么这里就会有两个重要的问题：控制什么？反转什么？
+
+控制：指控制对象的生命">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Hello World | 灰灰灰灰</title>
+    <title>Spring之IOC思想 | 灰灰灰灰</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -241,13 +243,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Hello World
+                        Spring之IOC思想
                     </div>
                 </div>
             </div>
@@ -357,12 +359,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Spirng/">
+                                <span class="chip bg-color">Spirng</span>
+                            </a>
+                        
+                            <a href="/tags/IOC/">
+                                <span class="chip bg-color">IOC</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Spring/" class="post-category">
+                                Spring
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -370,21 +389,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-17
+                    2019-10-18
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        73
+                        1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        4 分
                     </div>
                     
                 
@@ -395,15 +414,73 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h2 id="Spring中的IOC"><a href="#Spring中的IOC" class="headerlink" title="Spring中的IOC"></a>Spring中的IOC</h2><p>IOC（Inversion of Control），其名称是控制反转，是一种重要的设计思想,实现了程序设计的松耦合。其分为两个部分控制与反转，那么这里就会有两个重要的问题：控制什么？反转什么？</p>
+<ul>
+<li>控制：指控制对象的生命周期。</li>
+<li>反转：指将对象的控制权交由Spring容器处理。</li>
+</ul>
+<p>现在理解起来可能十分困难，等文章最后我们再来详细聊聊控制反转。现在通过一个例子来引出IOC。</p>
+<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><p>假设现在有这么一个场景，有一个人每天下班都需要开车回家。那么怎么用编程来描述这个事件呢？首先要有定义一辆车。这辆车名叫carA，有四个方法分别为启动、左转、右转、熄火。其结构如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CarA</span> <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>       <span class="token comment" spellcheck="true">//启动</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is starting!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">turnLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">//左转</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is turning left!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">turnRight</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>   <span class="token comment" spellcheck="true">//右转</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is turning right!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token comment" spellcheck="true">//熄火</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is stopping!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>然后需要定义一个人。这个人叫张三，拥有一辆carA车，并且有一个回家的方法。其结构如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> CarA carA<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">ZhangSan</span><span class="token punctuation">(</span>CarA carA<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>carA <span class="token operator">=</span> carA<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">goHome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        carA<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        carA<span class="token punctuation">.</span><span class="token function">turnLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        carA<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>张三离家很近，只需开车启动、左转、熄火就到了。那么每天张三只需要调用goHome()方法就能回到家了。直到有一天，张三凭借着自己的积蓄，买了第二辆车carB。那么同样我们需要定义这么一辆车carB，其结构和carA完全相同，并且需要把ZhangSan类中的所有和车有关的都换成carB。</p>
+<p>这时我们就发现问题了，如果某天张三拥有十辆车了，一天一辆轮着开，那么我们每天都需要频繁的修改ZhangSan类拥有的车及goHome方法，这是十分不合理的。</p>
+<p>这时我们需要明白，其实ZhangSan只需要回家的操作，他本身并不关注开的是什么车。换句话说，他家的保镖只需要在他公司下面停一辆车供张三下班后开回家，张三本身不关心开什么车回家。那么我们就可以进行重构，我们先抽象出这个车,其结构如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">turnLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">turnRight</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span></code></pre>
+<p>接着，ZhangSan类只需要把车改为抽象车，这样就可以实现每天开不同的车（多态）。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> Car car<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">ZhangSan</span><span class="token punctuation">(</span>Car car<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>car <span class="token operator">=</span> car<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">goHome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        car<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        car<span class="token punctuation">.</span><span class="token function">turnLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        car<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>此时我们可以在主函数中这样测试。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Car car <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CarA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//今天开A车</span>
+        ZhangSan zhangSan <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ZhangSan</span><span class="token punctuation">(</span>car<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        zhangSan<span class="token punctuation">.</span><span class="token function">goHome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>这样就可以解决上述的问题，张三今天想开什么车，就new一个车，然后回家，省去了在ZhangSan类中进行修改。但还有问题，张三每天想开不同的车就得new不同的车，他嫌太麻烦。他想可不可以每天公司下面停着自己的所有车，下班想开哪一辆开哪一辆。<br>这时引出了本文的主题IOC。我们可以把对象事先存放在Spring容器中（先把所有车停到公司下面），然后当我们需要某个对象时直接从Spring容器中取（下班后取一辆车）。这样就不用每次频繁的修改源代码new不同的对象了。此时再回过头来谈谈什么是IOC（控制反转）。</p>
+<h3 id="再谈IOC"><a href="#再谈IOC" class="headerlink" title="再谈IOC"></a>再谈IOC</h3><p>控制反转即将对象的控制权交由Spring容器处理。在传统的开发模式下，我们往往会自己new对象，此时对象的控制权在程序员手中，什么时候需要用直接new一个就行。而有了Spring IOC，程序员不需要自己手动new对象，Spring会把所有对象创建好放到了一个容器中，由Spring Bean进行统一管理，程序员想用直接拿就好了。<br>由此可以看出Spring的核心思想控制反转，对象的控制权由程序员转变到了Spring，程序员再也不用关心创建对象的过程，只需要关注对象的使用就行。同样再上述例子中，也可以抽象出Person类，实现不同的人开不同的车回家。</p>
+<p>那么Spring框架是如何实现IOC思想的呢，将在下一小节详细描述。</p>
 
             </div>
             <hr/>
@@ -430,7 +507,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2019/10/17/hello-world/">http://yoursite.com/2019/10/17/hello-world/</a>
+                    <a href="http://yoursite.com/2019/10/18/spring-zhi-ioc/">http://yoursite.com/2019/10/18/spring-zhi-ioc/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -467,7 +544,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Spirng/">
+                                    <span class="chip bg-color">Spirng</span>
+                                </a>
+                            
+                                <a href="/tags/IOC/">
+                                    <span class="chip bg-color">IOC</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -768,19 +853,19 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/10/18/spring-zhi-ioc/">
+                <a href="/2019/10/18/spring-zhi-di/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Spring之IOC思想">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Spring之DI">
                         
-                        <span class="card-title">Spring之IOC思想</span>
+                        <span class="card-title">Spring之DI</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Inversion of Control（IOC）是Spring的两大核心思想之一，其不是一种技术，而是一种降低程序耦合的设计思想。
+                            Dependency Injection（DI）依赖注入，在Spring框架创建对象的过程中，将对象的依赖属性动态的注入到对象中。
                         
                     </div>
                     <div class="publish-info">
@@ -802,12 +887,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spirng/">
-                        <span class="chip bg-color">Spirng</span>
-                    </a>
-                    
-                    <a href="/tags/IOC/">
-                        <span class="chip bg-color">IOC</span>
+                    <a href="/tags/Spring-DI/">
+                        <span class="chip bg-color">-Spring -DI</span>
                     </a>
                     
                 </div>
@@ -818,7 +899,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2019/10/17/hello-world/">
@@ -848,7 +929,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
