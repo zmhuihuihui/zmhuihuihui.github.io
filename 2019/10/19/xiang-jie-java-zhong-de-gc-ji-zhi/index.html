@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="人月平衡的奥秘, 灰灰灰灰">
-    <meta name="description" content="
-“人月是危险和带有欺骗性的神话，因为它暗示人员数量和时间是可以相互替换的。”   —《人月神话》
-
-&amp;emsp;&amp;emsp;花了大约一周的时间读完了软件工程管理领域的经典著作《人月神话》，初读题目便引发了我的思考，何为“人月”，又为何“神">
+    <meta name="keywords" content="详解Java中的GC机制, 灰灰灰灰">
+    <meta name="description" content="GC概述GC（Garbage Collections），就是垃圾回收机制。在C或C++中，开发人员需要手动的对内存进行分配和回收，需要时刻关注以防止出现内存泄漏。但在Java中，Java程序不用像C++程序在程序中自行处理内存的回收释放。这">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>人月平衡的奥秘 | 灰灰灰灰</title>
+    <title>详解Java中的GC机制 | 灰灰灰灰</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -244,13 +241,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        人月平衡的奥秘
+                        详解Java中的GC机制
                     </div>
                 </div>
             </div>
@@ -261,10 +258,99 @@
 
 
 
-<main class="container content">
+<main class="post-container content">
 
     
-    <!-- 文章内容详情 -->
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
@@ -273,8 +359,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E3%80%8A%E4%BA%BA%E6%9C%88%E7%A5%9E%E8%AF%9D%E3%80%8B/">
-                                <span class="chip bg-color">《人月神话》</span>
+                            <a href="/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
+                            </a>
+                        
+                            <a href="/tags/GC/">
+                                <span class="chip bg-color">GC</span>
                             </a>
                         
                     </div>
@@ -285,8 +375,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-category">
-                                读书笔记
+                            <a href="/categories/Java/" class="post-category">
+                                Java
                             </a>
                         
                     </div>
@@ -297,21 +387,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-18
+                    2019-10-19
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.8k
+                        2.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        5 分
+                        7 分
                     </div>
                     
                 
@@ -322,13 +412,36 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>“人月是危险和带有欺骗性的神话，因为它暗示人员数量和时间是可以相互替换的。”   —《人月神话》</p>
-</blockquote>
-<p>&emsp;&emsp;花了大约一周的时间读完了软件工程管理领域的经典著作《人月神话》，初读题目便引发了我的思考，何为“人月”，又为何“神话”。在带着这两个问题阅读后，我有了这样的理解，“人月”分为人和月，在软件开发的过程中，人代表着团队开发的人数，月代表着软件开发的时间。“人月“代表着一个工程的工作量，一个五人的团队耗时两个月完成，意味着此工程花费了十个人月。那么是否可以通过增加开发人数，降低开发时间达到相同的人月数而完成工程呢？这往往是达不到的，也就是说十个人的团队耗时一个月并不能完成同样的工程，因此称为“神话”。</p>
-<p>&emsp;&emsp;书中提到“人月是危险和带有欺骗性的神话，因为它暗示人员数量和时间是可以相互替换的。”也就是说人与月并不能完成相互的转换，造成这样的原因有这么两点，一是如果项目的任务是有序的，那么添加新的人手并没有太大意义，还是需要等待前提任务的完成。二是如果任务是无序的、可分解的，那么不同任务之间的人员交流与沟通会因为人数的变多而变得困难。因此精简的小团队更适合小型项目的开发，而如何进行大型项目的开发这是这本书着重想要阐述的。</p>
-<p>&emsp;&emsp;对于大型大项目的开发，作者提出了“外科手术”团体，团队中需要分配1/10的专业的开发人员来保证概念的完整性，并协调工作降低沟通的工作量。概念完整性是作者提出的核心观点，一个产品必须向每一个用户提供场景应用，功能体验和清晰的使用操作，概念的完整性决定了产品的易用性。所以这1/10的人承担着一个项目的重要职责。然后项目经理必须要制定正式的项目文档，通过项目文档可以记录清晰的策略，并减少交流产生的矛盾，同时可以使项目经理清楚的知道项目所处在的状态，一旦发现项目有所偏离，及时的可以对项目进行调整。所以项目文档是十分有必要的。接着项目最重要的环节在于交流与沟通，作者通过分析“巴比伦塔”的失败，表明团队应该尽可能多的进行交流与沟通，主要通过会议以及工作手册来实现。工作手册需要提前详细的制定，并且保证每一个团队成员都有一份，成员应该详尽的知道手册的工作内容，可以达到交流的效果，同时工作手册应该要及时的更新，以避免出现不必要的错误。沟通与交流是保证项目进度的关键一环。在一个完整的项目中，计划占1/3，编码占1/6，测试占1/2。在此之前所有的工作属于1/3计划部分，但却是十分重要的，直接影响后面所有的进度。接着是其中1/6编码部分，一个产品的困难在于规格说明、概念和测试，而并非技术方面，所以编码在其中的占比是最小的，项目经理制定策略来规定通用的开发工具（操作系统、语言等），系统结构师用来保证系统的完整性，加强不同团队成员的导向与交流，而开发人员只需编码来实现自己团队的模块的完整性，保证团队内的沟通。最后的测试部分工程量是最大的，十分耗时耗力的，占了整个项目一半的时间，其中又分为1/4的软件测试与1/4的系统测试。其中最困难的就是系统测试，我们需要通过系统的、可计划的方法，开发大量复杂的辅助测试平台来实现系统测试，同时需要有人负责构件的变更和版本控制。测试的重要作用在于通过不断测试优化消除bug，可以更好的保证系统的完整性，提供更好的用户体验，所以从用户的角度出发应该在测试上投入最多的时间。以上就是在大型项目的开发过程中，应该如何对其进行有效的管理。</p>
-<p>&emsp;&emsp;在书的后半部分，作者以“没有银弹”为主题展开讨论，那么何为“没有银弹”呢？“没有银弹”指的是在十年内，没有任何一种技术或管理方法可以使软件的生产率、可靠性和整洁性获得数量级上的提升。我们知道，在开发任何软件系统时都有无法规避的四大特性：复杂性、可变性、一致性和不可变性。其中复杂性是造成“没有银弹”理论成立的重要因素之一，软件的复杂导致了团队沟通困难，产品的易用性可靠性下降，进度延时等一系列复杂的问题，是造成软件开发困难的内在根本原因。要想实现一个完美的产品，必定要制定精细的项目计划，长时间的开发交流与研究，不断反复的测试调试，在这些环节中并没有一种技术或方法可以一劳永逸的降低项目开发的复杂度，即使一些前沿技术可以提高效率但也并没有达到数量级上的提升。因此，“没有银弹”的理论以目前的技术来看是有所道理的。但未来是否有可能打破“没有银弹”的理论呢？随着技术的提升，人工智能等领域的不断成熟，或是面向对象编程的新语言的出现，或是未来某种技术、管理方法被挖掘，都会有打破“没有银弹”理论的无尽的可能。到那时，软件开发将进入一个全新的时代，更低的成本，更简单易用的技术，更方便统一的管理方法，得到的却是更高的生产率。因此，未来的这些种种都有可能会让软件开发在生产率、可靠性和整洁性上达到一个数量级上的提升。</p>
+                <h2 id="GC概述"><a href="#GC概述" class="headerlink" title="GC概述"></a>GC概述</h2><p>GC（Garbage Collections），就是垃圾回收机制。在C或C++中，开发人员需要手动的对内存进行分配和回收，需要时刻关注以防止出现内存泄漏。但在Java中，Java程序不用像C++程序在程序中自行处理内存的回收释放。这是因为Java在JVM虚拟机上增加了垃圾回收(GC)机制，用以在合适的时间触发垃圾回收，将不需要的内存空间回收释放，避免无限制的内存增长导致的OOM。<br>那么我们来研究下JVM中是如何实现GC机制的。本篇文章将从以下几点展开：</p>
+<ul>
+<li>如何判断垃圾</li>
+<li>常见垃圾回收算法</li>
+<li>详解分代收集算法</li>
+<li>垃圾收集器</li>
+</ul>
+<h3 id="什么样的对象可以被认为是垃圾？"><a href="#什么样的对象可以被认为是垃圾？" class="headerlink" title="什么样的对象可以被认为是垃圾？"></a>什么样的对象可以被认为是垃圾？</h3><p>什么样的对象可以被认为是垃圾，这是一个十分关键的问题，需要准确的找出哪些对象正在使用，哪些对象不会使用，也是JVM实现GC的第一步。JVM提供了两种算法来实现垃圾的判断：</p>
+<p>1、引用计数器<br>当对象被生成时，同时伴随有一个计数器。当这个对象被引用是，计数器就+1。当引用失效时，计数器则-1。当计数器等于0时，则认为该对象已经“死亡”。但这种算法存在一个致命的问题，就是无法解决“循环引用”的现象，即对象之间相互引用。所以这种算法没有很少被使用。</p>
+<p>2、可达性分析算法<br>JVM会将所有的引用关系转化为图结构，以GC Roots对象为起始点，并向下搜索标记，标记到的即为存活，没标记到的即为死亡。这也是目前主流的垃圾判断算法。其过程如下图所示：<br><img src="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/1.png" alt="可达性分析算法"><br>那么如何选定GC Roots对象，一般JVM会在以下几种对象中选取：</p>
+<ul>
+<li>虚拟机栈中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中的常量引用的对象</li>
+<li>本地方法栈中JNI（即一般说的Native方法）的引用的对象</li>
+</ul>
+<h3 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h3><p>当可以判断出了内存中的垃圾时，JVM可以通过算法来回收垃圾了，JVM中一般有以下几种回收算法：</p>
+<p>1、标记—清除算法<br>通过遍历内存，标记出所有需要清理的垃圾，然后等标记完成后统一回收。标记清除算法存在的问题是，当回收垃圾后，内存会出现大量不连续的内存段，如果此时要存储占有较大内存的对象，则无法满足，此时JVM会再次触发垃圾回收机制。其流程如下：<br><img src="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/2.png" alt="标记-清除算法"></p>
+<p>2、复制算法<br>首先将内存平分为AB两部分，每次只是用其中一部分，当A部分内存存满后，将A内存中所有存活的对象移到B内存中（有序），然后清空A全部内存。复制算法虽然解决了内存的不连续性，但却需要牺牲一半的内存容量，代价较高。其流程如下：<br><img src="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/3.png" alt="复制算法"></p>
+<p>3、标记—整理算法<br>标记—整理算法是标记-清除算法的改进，在标记过后，将存活内存移到一端按序存放，然后清除最后存活内存以后的所有内存。其流程如下：<br><img src="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/4.png" alt="标记-整理算法"></p>
+<p>4、分代收集算法<br>分代收集算法是目前大部分JVM所采用的算法，它将内存按生命周期分为不同的区域，然后对不同区域对使用不同的收集算法。接下来将详细描述分代收集算法中区域的划分以及不同区域具体的回收机制。</p>
+<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>在分代收集算法中，JVM会将内存按对象生命周期划分为不同的区域。在JDK1.8以前，内存堆分为新生代、老年代和永久代。在JDK1.8及以后，内存堆只被划分为了新生代和老年代（划分比例1:2）。</p>
+<p><strong>新生代</strong>：大部分新创建的对象都会存放在新生代中，新生代是以生命周期较短划分出来的，所以里面的大多数对象都是朝夕生死的，只有少部分生命周期较长的会被转移到老年代中。新生代中分为三个部分，一个eden区和两个survive区（form和to），其分配比例为8:1:1，其大致结构如下：<br><img src="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/5.png" alt="新生代结构"><br>那么对象是如何存储的呢，首先每一个新对象会被存放在eden区，由于新生代生命周期较短，所以80%的对象已经死亡。此时JVM将还存活的对象记录年龄为0（出生了）。经过一段时间，当eden区被填满时，会触发Minor GC机制处理垃圾。通过上面讲到的复制算法将eden区存活的对象存放到from区，并将年龄增加一岁（活过了一次Minor GC）。其流程如下图：<br><img src="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/6.png" alt="经过一次GC后"><br>当eden区又被填满时，会再次触发Minor GC机制。此时eden和from区都会有大量的对象死亡，同样利用复制算法，将eden和from中存活的对象复制到to区，并将其年龄+1。此时to区变为from区，from区变为to区。其流程如下：<br><img src="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/7.png" alt="又经过一次GC后"><br>如此反复循环，其关键是永远保持to区为空，用于存放 Minor GC后存活下来的对象。经过不断的Minor GC后，存活下来的对象年龄不断增长，直到年龄到达15岁（JVM默认）。JVM就会认为你这个对象生命周期过长，不适合在生命周期较短的新生代中生活。所以将这些对象转移到 了老年代。</p>
+<p><strong>老年代</strong>：和新生代相反，这里存放着生命周期较长的对象。但老年代中也同样会出现死亡的现象，只是没有新生代这么频繁。当老年代中被填满时，就会触发Full GC来回收整的堆内存上的垃圾（新生代+老年代）。此时，老年代中不像新生代中使用复制算法（因为老年代存活率高，复制算法效率低），而是使用标记清除或标记整理算法来实现垃圾的回收。</p>
+<p>但在实际情况中也会出现一些特殊情况：<br>1、当新建的对象太大超过JVM默认的一个值时，会讲这个对象直接存放在老年代中。</p>
+<p>2、当eden中存活下来的对象，想要放到survive区却没有足够的空间时，则会直接存放到老年代中。</p>
+<p>3、如果survive中存活对象进入老年代，但老年代没有足够的内存空间时，就会触发一次Full GC。</p>
+<p>以上就是GC机制中的基本理论原理，在实际中JVM会通过垃圾收集器来完成垃圾收集的工作，接下来接收下垃圾收集器：</p>
+<h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p>垃圾收集器分为新生代的垃圾收集器和老年代的垃圾收集器，种类繁多，不同的JVM中选择不同的收集器来实现GC操作，其中主流垃圾收集器如下图所示：<br><img src="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/8.png" alt="主流垃圾收集器"><br>其中新生代中主流的垃圾收集器有Serial、ParNew和Parallel Scavenge收集器。老年代中主流的收集器有CMS、Serial Old和Parallel Old。G1收集器可以同时使用在老年代和新生代。图中的连线表示收集器之间可以组合配合使用。这些收集器有各自的优缺点，在不同JVM中会使用不同的组合来完成GC。</p>
+<p>JVM中的GC机制的大致流程就是这样，掌握GC知识一方面可以帮助我们快速排查因JVM导致的线上问题，另一方面也可以帮助我们在Java应用发布之前合理地对JVM进行调优，提高应用的执行效率、可靠性和健壮性。</p>
 
             </div>
             <hr/>
@@ -355,7 +468,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2019/10/18/ren-yue-ping-heng-de-ao-mi/">http://yoursite.com/2019/10/18/ren-yue-ping-heng-de-ao-mi/</a>
+                    <a href="http://yoursite.com/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/">http://yoursite.com/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -393,8 +506,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E3%80%8A%E4%BA%BA%E6%9C%88%E7%A5%9E%E8%AF%9D%E3%80%8B/">
-                                    <span class="chip bg-color">《人月神话》</span>
+                                <a href="/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
+                                </a>
+                            
+                                <a href="/tags/GC/">
+                                    <span class="chip bg-color">GC</span>
                                 </a>
                             
                         </div>
@@ -697,19 +814,19 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/">
+                <a href="/2019/10/19/xiang-jie-java-zhong-de-lei-jia-zai-ji-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="详解Java中的GC机制">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="详解Java中的类加载机制">
                         
-                        <span class="card-title">详解Java中的GC机制</span>
+                        <span class="card-title">详解Java中的类加载机制</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Garbage Collections（GC）,Java程序利用垃圾回收机制不用像C++程序在程序中自行处理内存的回收释放，在合适的时间触发GC，将不需要的内存空间回收释放，避免无限制的内存增长导致的OOM。
+                            Java的平台无关性是其一大特点,是指Java的源码会被编译成Class字节码文件，被不同平台上的JVM所解析执行，从而实现跨平台性.
                         
                     </div>
                     <div class="publish-info">
@@ -735,10 +852,6 @@
                         <span class="chip bg-color">JVM</span>
                     </a>
                     
-                    <a href="/tags/GC/">
-                        <span class="chip bg-color">GC</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -750,19 +863,19 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/18/spring-zhi-di/">
+                <a href="/2019/10/18/ren-yue-ping-heng-de-ao-mi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Spring之DI">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="人月平衡的奥秘">
                         
-                        <span class="card-title">Spring之DI</span>
+                        <span class="card-title">人月平衡的奥秘</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Dependency Injection（DI）依赖注入，在Spring框架创建对象的过程中，将对象的依赖属性动态的注入到对象中。
+                            人月是危险和带有欺骗性的神话，因为它暗示人员数量和时间是可以相互替换的。 -《人月神话》
                         
                     </div>
                     <div class="publish-info">
@@ -773,8 +886,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    读书笔记
                                 </a>
                             
                             
@@ -784,12 +897,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
-                    </a>
-                    
-                    <a href="/tags/DI/">
-                        <span class="chip bg-color">DI</span>
+                    <a href="/tags/%E3%80%8A%E4%BA%BA%E6%9C%88%E7%A5%9E%E8%AF%9D%E3%80%8B/">
+                        <span class="chip bg-color">《人月神话》</span>
                     </a>
                     
                 </div>
@@ -868,6 +977,100 @@
 code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
 </style>
 
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
 
     
 

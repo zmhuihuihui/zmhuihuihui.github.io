@@ -456,14 +456,14 @@
 
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>beans</span><span class="token punctuation">></span></span></code></pre>
-<p>这是系统自动写好的开头，我们需要在<beans>标签中添加我们的对象。回到上一小节的例子，张三想要开车回家，那么我们首先要先获取车这个对象，那么我们先把所有车交由Spring管理。这里用到<bean>标签：</bean></beans></p>
+<p>这是系统自动写好的开头，我们需要在beans标签中添加我们的对象。回到上一小节的例子，张三想要开车回家，那么我们首先要先获取车这个对象，那么我们先把所有车交由Spring管理。这里用到bean标签：</p>
 <pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>carA<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity.CarImpl.CarA<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>carB<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity.CarImpl.CarB<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
-<p><bean>标签这里用到两个属性，第一个id即为实例的名字，第二个class即为你要交由Spring管理的类。这样我们就将A车和B车对象都交由Spring容器管理。接着我们需要一个ZhangSan对象，使用相同<bean>标签:</bean></bean></p>
+<p><bean>标签这里用到两个属性，第一个id即为实例的名字，第二个class即为你要交由Spring管理的类。这样我们就将A车和B车对象都交由Spring容器管理。接着我们需要一个ZhangSan对象，使用相同bean标签:</bean></p>
 <pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ZhangSan<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity.PersonImpl.ZhangSan<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>car<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>carA<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
-<p>这里有所不同，id和class和上述一样，但在<bean>标签中还有<constructor-arg>子标签。我我们想象一下，如果我们亲手new一个对象，就会使用到构造器，那么这里也同样的道理，在将对象创建时，有时可能会使用有参数的构造器，那么就会用到<constructor-arg>标签实现构造器注入，这个标签必须与类中构造器相匹配，即相当是调用这个构造器：</constructor-arg></constructor-arg></bean></p>
+<p>这里有所不同，id和class和上述一样，但在bean标签中还有constructor-arg子标签。我们想象一下，如果我们亲手new一个对象，就会使用到构造器，那么这里也同样的道理，在将对象创建时，有时可能会使用有参数的构造器，那么就会用到constructor-arg标签实现构造器注入，这个标签必须与类中构造器相匹配，即相当是调用这个构造器：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token keyword">extends</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
     ……
 
@@ -476,7 +476,7 @@
 <pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ZhangSan<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity.PersonImpl.ZhangSan<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>car<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>carA<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
-<p>这里使用了<property>标签，必须要求类中有对应的set方法，效果和构造器注入相同，即相当于使用了这个方法：</property></p>
+<p>这里使用了property标签，必须要求类中有对应的set方法，效果和构造器注入相同，即相当于使用了这个方法：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token keyword">extends</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
 
     ……
@@ -527,7 +527,7 @@
         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is stopping!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>只需在CarA类名上面添加一个注解@ Component就实现了相当于xml中的<bean>标签，其中的value即使实例的名字，相当于xml中的id。对比复杂的xml配置，注解的方式清晰明了。同样对于ZhangSan类：</bean></p>
+<p>只需在CarA类名上面添加一个注解@Component就实现了相当于xml中的bean标签，其中的value即使实例的名字，相当于xml中的id。对比复杂的xml配置，注解的方式清晰明了。同样对于ZhangSan类：</p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span><span class="token punctuation">(</span><span class="token string">"ZhangSan"</span><span class="token punctuation">)</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token keyword">extends</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
 
@@ -555,7 +555,7 @@
 
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">context:</span>component-scan</span> <span class="token attr-name">base-package</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>beans</span><span class="token punctuation">></span></span></code></pre>
-<p>标签<a href="context:component-scan" target="_blank" rel="noopener">context:component-scan</a>的作用是开启注解扫描，base-package为扫描范围。我们对entity包下全部扫描，就可以实现自动扫描注解然后将对象放入Spring容器中。需要注意的一点是此标签在context包中，所以<beans>标签中需要添加context相关的命名空间。xml配置好了后，到主函数，主函数无需任何改动直接运行，就可以得到与xml注入相同的效果。</beans></p>
+<p>标签context:component-scan的作用是开启注解扫描，base-package为扫描范围。我们对entity包下全部扫描，就可以实现自动扫描注解然后将对象放入Spring容器中。需要注意的一点是此标签在context包中，所以beans标签中需要添加context相关的命名空间。xml配置好了后，到主函数，主函数无需任何改动直接运行，就可以得到与xml注入相同的效果。</p>
 <p>以上就是Spring中的IOC和DI的基本使用方法。</p>
 
             </div>
@@ -963,10 +963,6 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">读书笔记</span>
-                    </a>
-                    
                     <a href="/tags/%E3%80%8A%E4%BA%BA%E6%9C%88%E7%A5%9E%E8%AF%9D%E3%80%8B/">
                         <span class="chip bg-color">《人月神话》</span>
                     </a>
@@ -1212,7 +1208,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">4.9k</span>&nbsp;字
+                class="white-color">11.2k</span>&nbsp;字
             
             
             

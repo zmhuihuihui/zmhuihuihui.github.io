@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="friends, 灰灰灰灰">
-    <meta name="description" content="friends | 灰灰灰灰">
+    <meta name="keywords" content="详解Java中的类加载机制, 灰灰灰灰">
+    <meta name="description" content="我们都知道Java的平台无关性是其一大特点，所谓平台无关性是指Java的源码会被编译成Class字节码文件，其字节码文件可以被不同平台上的JVM所解析然后执行，从而实现跨平台性。那么这一过程是具体是如何实现的呢？
+类加载器类加载器（Clas">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>friends | 灰灰灰灰</title>
+    <title>详解Java中的类加载机制 | 灰灰灰灰</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -237,264 +238,209 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                面向信仰编程
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="typed"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
-                <script>
-                    var typed = new Typed("#typed", {
-                        strings: ['从来没有真正的绝境, 只有心灵的迷途', 'Never really desperate, only the lost of the soul'],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    $('.bg-cover').css('background-image', 'url(/medias/banner/2.jpg)');
-</script>
-
-
-    </div>
-</div>
-<style>
-    .friends-container {
-        margin-top: -100px;
-        margin-bottom: 30px;
-    }
-
-    .friends-container .tag-title {
-        margin-bottom: 10px;
-        color: #3C4858;
-        font-size: 1.75rem;
-        font-weight: 400;
-    }
-
-    .frind-ship img {
-        border-radius: 50%;
-    }
-
-    /* 一下是按钮样式 */
-
-    .frind-ship {
-        padding: 10px 20px;
-    }
-
-    .frind-ship .title {
-        display: flex;
-        align-items: center;
-    }
-
-    .frind-ship .title div {
-        color: #fff;
-        padding-left: 10px;
-    }
-
-    .frind-ship .title img {
-        width: 100px;
-        height: 100px;
-        flex-shrink: 0;
-    }
-
-    .frind-ship .title h1 {
-        line-height: 0.8rem;
-        padding-bottom: 16px;
-        border-bottom: 2px solid #fff;
-        position: relative;
-        top:-15px;
-        left: 3px;
-    }
-
-    .friend-button {
-        display: flex;
-        justify-content: center;
-        margin-bottom: -27px;
-    }
-
-    .friend-button a {
-        border-radius: 40px;
-    }
-
-    .friend-all .tag-post {
-        margin-bottom: 30px;
-    }
-
-    .button-caution {
-        background-color: #FF4351;
-        border-color: #FF4351;
-        color: #FFF;
-    }
-
-    .button {
-        font-weight: 300;
-        font-size: 16px;
-        font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-        text-decoration: none;
-        text-align: center;
-        line-height: 40px;
-        height: 40px;
-        padding: 0 40px;
-        margin: 0;
-        display: inline-block;
-        appearance: none;
-        cursor: pointer;
-        border: none;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-transition-property: all;
-        transition-property: all;
-        -webkit-transition-duration: .3s;
-        transition-duration: .3s;
-    }
-
-    .title {
-        margin-bottom: 0rem !important;
-    }
-
-    .card {
-        margin: 3rem 0 1rem 0 !important;
-    }
-
-    .button-glow.button-caution {
-        -webkit-animation-name: glowing-caution;
-        animation-name: glowing-caution;
-    }
-
-    @-webkit-keyframes glowing-caution {
-        from {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-
-        50% {
-            -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-            box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-        }
-
-        to {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-    }
-
-    @keyframes glowing-caution {
-        from {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-
-        50% {
-            -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-            box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-        }
-
-        to {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-    }
-
-    .button-caution:hover {
-        background-color: #ff7680;
-        border-color: #ff7680;
-        color: #FFF;
-        text-decoration: none;
-    }
-
-    .frind-card1 {
-        background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    }
-
-    .frind-card2 {
-        background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
-    .frind-card3 {
-        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
-    }
-
-    .frind-card4 {
-        background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-    }
-
-    .frind-card5 {
-        background-image: linear-gradient(to top, #c471f5 0%, #fa71cd 100%);
-    }
-
-    .frind-card6 {
-        background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
-    }
-
-    .frind-card7 {
-        background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
-    }
-
-    .frind-card8 {
-        background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);
-    }
-
-    .frind-card9 {
-        background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
-    }
-
-    .frind-card10 {
-        background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
-    }
     
-    article .card {
-        overflow: visible !important;
-    }
-</style>
 
-<main class="content">
-    <div class="container friends-container">
-        <div class="card">
-            <div class="card-content">
-                <div class="tag-title center-align">
-                    <i class="fas fa-address-book"></i>&nbsp;&nbsp;友情链接
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        详解Java中的类加载机制
+                    </div>
                 </div>
-                <article id="friends-link">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
                     
-                </article>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Java/" class="post-category">
+                                Java
+                            </a>
+                        
+                    </div>
+                    
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-10-19
+                </div>
+
                 
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        963
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        3 分
+                    </div>
+                    
+                
+				
+				
             </div>
         </div>
-        <div class="card">
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>我们都知道Java的平台无关性是其一大特点，所谓平台无关性是指Java的源码会被编译成Class字节码文件，其字节码文件可以被不同平台上的JVM所解析然后执行，从而实现跨平台性。那么这一过程是具体是如何实现的呢？</p>
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>类加载器（ClassLoader），顾名思义就是专门用来加载类的，其作用是负责将class文件读入内存，并为之生成对应的java.lang.Class对象。当JVM启动时，会形成有3个类加载器组成的初始类加载器层次结构：</p>
+<ul>
+<li>Bootstrap ClassLoader   这个加载器主要负责加载Java中核心包，例如java.lang.*</li>
+<li>ExtClassLoader  这个加载器主要负责加载Java中的扩展包，例如javax</li>
+<li>AppClassLoader  这个加载器主要负责加载应用程序主程序类</li>
+</ul>
+<p>同时，也可以自定义ClassLoader。通过类加载器，可以将我们的Class字节码文件转化为相应的二进制字节流到JVM中。那么此时就会出现一个问题，一个Class字节码文件该由哪个类加载器来执行呢？</p>
+<h3 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h3><p>双亲委派机制就是为了解决多个加载器重复解析同一个字节码文件，当同时存在两个或多个全限定名完全一致的情况下。该如何选择加载哪个类。这就是双亲委派机制要做的工作。其机制如下图：<br><img src="/2019/10/19/xiang-jie-java-zhong-de-lei-jia-zai-ji-zhi/1.png" alt="双亲委派机制"><br>当有一个出现Class字节码文件时，首先交由自定义加载器看是否加载，如果加载了则不继续提交给父加载器，如果不加载则提交给父加载器AppClassLoader。同样如果AppClassLoader不加载则继续提交给其父加载器ExtClassLoader，如果ExtClassLoader还是不加载则最终提交给Bootstrap ClassLoader。此过程自底向上。<br>然后Bootstrap ClassLoader开始从尝试加载此字节码文件，如果它表示无法加载，则向下转交给子加载器。以此类推，如果最终自定义类加载器也无法加载此字节码文件则抛出异常。此过程自顶向下。</p>
+<p>此流程即为双亲委派机制，通过这个机制可以有效的避免对字节码文件的重复加载。</p>
+<h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><p>类的加载机制其实就是将字节码文件加载的jvm的内存之中。在JVM中并不是一次性把所有的文件都加载到，而是一步一步按照步骤来加载。JVM启动时会通过不同的类加载器加载不同的类，而且同一个类也不可能由多个加载器来进行加载。<br><img src="/2019/10/19/xiang-jie-java-zhong-de-lei-jia-zai-ji-zhi/2.png" alt="类加载过程"><br>之前，通过类加载器实现了第一步，加载过程。<br>接着，用户想要拿到JVM中的Class对象，有两种实现的方法，一种为forName()方法，一种为loadClass()方法，其过程完全不同。</p>
+<ul>
+<li>forName()实现<pre class=" language-java"><code class="language-java">Class <span class="token class-name">test</span> <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"Test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+直接通过Class的静态方法可以获取想要的对象，此过程会自动实现图中的链接和初始化阶段。</li>
+</ul>
+<ul>
+<li>loadClass()实现<pre class=" language-java"><code class="language-java">ClassLoader cl <span class="token operator">=</span> Test<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Class <span class="token class-name">test</span> <span class="token operator">=</span> cl<span class="token punctuation">.</span><span class="token function">loadClass</span><span class="token punctuation">(</span><span class="token string">"Test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+首先获取处理该字节码的类加载器，然后通过类加载器生成用户想要的对象，和forName()方法不同的是此方法只完成了加载阶段，并没有实现链接和初始化阶段。那么这种方法有什么应用场景呢？在Spring框架中，可以通过loadClass()方法实现一种加载方式–懒加载模式。只将类加载到JVM中，只有当该类真正用到的时候才会被检查和初始化，这样可以大大的提高运行的效率。</li>
+</ul>
 
-            
+            </div>
+            <hr/>
 
-            
+            <meta charset="utf-8">
 
-            
 
-            
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://yoursite.com" rel="external nofollow noreferrer">zmh</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://yoursite.com/2019/10/19/xiang-jie-java-zhong-de-lei-jia-zai-ji-zhi/">http://yoursite.com/2019/10/19/xiang-jie-java-zhong-de-lei-jia-zai-ji-zhi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://yoursite.com" target="_blank">zmh</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
 
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
             
-            <style>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
     .valine-card {
         margin: 1.5rem auto;
     }
@@ -751,19 +697,189 @@
     });
 </script>
 
-            
+    
 
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/10/19/yi-ren-wei-ben/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="以人为本">
+                        
+                        <span class="card-title">以人为本</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            工作中的很多问题属于社会学范畴，而非技术范畴。-《人件》
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    读书笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E3%80%8A%E4%BA%BA%E4%BB%B6%E3%80%8B/">
+                        <span class="chip bg-color">《人件》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
         </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="详解Java中的GC机制">
+                        
+                        <span class="card-title">详解Java中的GC机制</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Garbage Collections（GC）,Java程序利用垃圾回收机制不用像C++程序在程序中自行处理内存的回收释放，在合适的时间触发GC，将不需要的内存空间回收释放，避免无限制的内存增长导致的OOM。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
+                    </a>
+                    
+                    <a href="/tags/GC/">
+                        <span class="chip bg-color">GC</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
     </div>
-</main>
+</article>
+
+</div>
+
 
 <script>
-    $(function () {
-        $('#friends-link').masonry({
-            itemSelector: '.friend-div'
-        });
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 灰灰灰灰<br />'
+            + '文章作者: zmh<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
     });
 </script>
+
+
+<!-- 代码块功能依赖 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    
+
+</main>
+
 
 
     <footer class="page-footer bg-color">
