@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-19T03:23:15.761Z</updated>
+  <updated>2019-10-21T08:17:55.882Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,66 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>详解String中的intern()方法</title>
+    <link href="http://yoursite.com/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/"/>
+    <id>http://yoursite.com/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/</id>
+    <published>2019-10-21T07:25:34.000Z</published>
+    <updated>2019-10-21T08:17:55.882Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;String基础知识&quot;&gt;&lt;a href=&quot;#String基础知识&quot; class=&quot;headerlink&quot; title=&quot;String基础知识&quot;&gt;&lt;/a&gt;String基础知识&lt;/h3&gt;&lt;p&gt;在Java中创建String对象有两种方法分别为：&lt;/p&gt;
+&lt;pre
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="String" scheme="http://yoursite.com/tags/String/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中HashMap的实现原理</title>
+    <link href="http://yoursite.com/2019/10/21/java-zhong-hashmap-de-shi-xian-yuan-li/"/>
+    <id>http://yoursite.com/2019/10/21/java-zhong-hashmap-de-shi-xian-yuan-li/</id>
+    <published>2019-10-21T06:06:39.000Z</published>
+    <updated>2019-10-21T08:12:29.290Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;Java中HashMap概述&quot;&gt;&lt;a href=&quot;#Java中HashMap概述&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="HashMap" scheme="http://yoursite.com/tags/HashMap/"/>
+    
+  </entry>
+  
+  <entry>
     <title>详解设计模式—观察者模式</title>
     <link href="http://yoursite.com/2019/10/19/xiang-jie-she-ji-mo-shi-guan-cha-zhe-mo-shi/"/>
     <id>http://yoursite.com/2019/10/19/xiang-jie-she-ji-mo-shi-guan-cha-zhe-mo-shi/</id>
     <published>2019-10-19T03:04:38.000Z</published>
-    <updated>2019-10-19T03:23:15.761Z</updated>
+    <updated>2019-10-21T08:13:02.329Z</updated>
     
     <summary type="html">
     
@@ -48,7 +103,7 @@
     <link href="http://yoursite.com/2019/10/19/yi-ren-wei-ben/"/>
     <id>http://yoursite.com/2019/10/19/yi-ren-wei-ben/</id>
     <published>2019-10-19T02:57:34.000Z</published>
-    <updated>2019-10-19T03:01:03.795Z</updated>
+    <updated>2019-10-21T08:12:37.461Z</updated>
     
     <summary type="html">
     
@@ -76,7 +131,7 @@
     <link href="http://yoursite.com/2019/10/19/xiang-jie-java-zhong-de-lei-jia-zai-ji-zhi/"/>
     <id>http://yoursite.com/2019/10/19/xiang-jie-java-zhong-de-lei-jia-zai-ji-zhi/</id>
     <published>2019-10-19T02:27:52.000Z</published>
-    <updated>2019-10-19T02:48:05.168Z</updated>
+    <updated>2019-10-21T08:12:54.940Z</updated>
     
     <summary type="html">
     
@@ -104,7 +159,7 @@
     <link href="http://yoursite.com/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/"/>
     <id>http://yoursite.com/2019/10/19/xiang-jie-java-zhong-de-gc-ji-zhi/</id>
     <published>2019-10-19T01:45:19.000Z</published>
-    <updated>2019-10-19T02:29:55.646Z</updated>
+    <updated>2019-10-21T06:09:20.163Z</updated>
     
     <summary type="html">
     
