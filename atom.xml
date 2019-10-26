@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-21T08:17:55.882Z</updated>
+  <updated>2019-10-26T08:17:20.119Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>开源文化</title>
+    <link href="http://yoursite.com/2019/10/26/kai-yuan-wen-hua/"/>
+    <id>http://yoursite.com/2019/10/26/kai-yuan-wen-hua/</id>
+    <published>2019-10-26T07:54:32.000Z</published>
+    <updated>2019-10-26T08:17:20.119Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&amp;emsp;&amp;emsp;最近又在阅读《大教堂与集市》这一本书，从书名就可以看出，描述的是“大教堂”与“集市”两种经典的软件开发模式。“大教堂”描述的是传统的大规模软件开发模式，“集市”描述的是开源的软件开发模式。整本书的核心便是大教堂与集市这一章，详细的阐述了集市模式背后的
+        
+      
+    
+    </summary>
+    
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="《大教堂与集市》" scheme="http://yoursite.com/tags/%E3%80%8A%E5%A4%A7%E6%95%99%E5%A0%82%E4%B8%8E%E9%9B%86%E5%B8%82%E3%80%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>详解设计模式—单例模式</title>
+    <link href="http://yoursite.com/2019/10/26/xiang-jie-she-ji-mo-shi-dan-li-mo-shi/"/>
+    <id>http://yoursite.com/2019/10/26/xiang-jie-she-ji-mo-shi-dan-li-mo-shi/</id>
+    <published>2019-10-26T06:34:38.000Z</published>
+    <updated>2019-10-26T07:51:39.891Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;单例模式概述&quot;&gt;&lt;a href=&quot;#单例模式概述&quot; class=&quot;headerlink&quot; title=&quot;单例模式概述&quot;&gt;&lt;/a&gt;单例模式概述&lt;/h2&gt;&lt;p&gt;单例模式是23种设计模式中较为简单的一种。其模式保证实体类只能创建并返回唯一的一个对象，其结构需要保证
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="单例模式" scheme="http://yoursite.com/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>详解String中的intern()方法</title>
     <link href="http://yoursite.com/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/"/>
     <id>http://yoursite.com/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/</id>
     <published>2019-10-21T07:25:34.000Z</published>
-    <updated>2019-10-21T08:17:55.882Z</updated>
+    <updated>2019-10-26T07:52:18.885Z</updated>
     
     <summary type="html">
     

@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring之DI, 灰灰灰灰">
-    <meta name="description" content="Spring中的DI在上一小节中，我们阐述了Spring中的核心思想IOC，那么在Spring中是如何实现IOC思想的呢？在Spring中通过DI（依赖注入）的方式来实现IOC思想的。那何为依赖注入呢？即指Spring容器通过Spring ">
+    <meta name="keywords" content="详解设计模式—单例模式, 灰灰灰灰">
+    <meta name="description" content="单例模式概述单例模式是23种设计模式中较为简单的一种。其模式保证实体类只能创建并返回唯一的一个对象，其结构需要保证 构造器私有化 和 静态方法返回对象，通过该类的唯一访问方式获得其唯一的对象，可以直接访问此方法，不需要实例化该类的对象。
+实">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Spring之DI | 灰灰灰灰</title>
+    <title>详解设计模式—单例模式 | 灰灰灰灰</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -241,13 +242,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Spring之DI
+                        详解设计模式—单例模式
                     </div>
                 </div>
             </div>
@@ -359,12 +360,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Spring/">
-                                <span class="chip bg-color">Spring</span>
-                            </a>
-                        
-                            <a href="/tags/DI/">
-                                <span class="chip bg-color">DI</span>
+                            <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+                                <span class="chip bg-color">单例模式</span>
                             </a>
                         
                     </div>
@@ -375,8 +372,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Spring/" class="post-category">
-                                Spring
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                设计模式
                             </a>
                         
                     </div>
@@ -387,21 +384,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-18
+                    2019-10-26
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2k
+                        708
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        8 分
+                        2 分
                     </div>
                     
                 
@@ -412,151 +409,91 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Spring中的DI"><a href="#Spring中的DI" class="headerlink" title="Spring中的DI"></a>Spring中的DI</h2><p>在<a href="https://zmhuihuihui.github.io/2019/10/18/spring-zhi-ioc/" target="_blank" rel="noopener">上一小节</a>中，我们阐述了Spring中的核心思想IOC，那么在Spring中是如何实现IOC思想的呢？<br>在Spring中通过DI（依赖注入）的方式来实现IOC思想的。那何为依赖注入呢？即指Spring容器通过Spring Bean对象来创建和维护对象之间的依赖关系，通过DI将对象的依赖关系动态的注入到对象中去，粗略的讲Spring Bean负责创建管理对象，DI负责对象的初始化。</p>
-<h3 id="Soring-Bean对象"><a href="#Soring-Bean对象" class="headerlink" title="Soring Bean对象"></a>Soring Bean对象</h3><p>Spring Bean是在Spring框架运行时所管理的对象，是Spring应用程序的基本构件块。Spring框架中BeanFactory负责创建并维护Bean实例，将系统配置和依赖关系从代码中独立了出来。在实际操作我们应该指定将哪些类用作Bean交由Spring管理，并不是所有类都要交由Spring管理。其对类的具体管理包括：</p>
-<ul>
-<li>创建一个对象</li>
-<li>通过依赖注入提供依赖项</li>
-<li>拦截方法调用以提供额外的框架功能</li>
-<li>销毁一个对象</li>
+                <h2 id="单例模式概述"><a href="#单例模式概述" class="headerlink" title="单例模式概述"></a>单例模式概述</h2><p>单例模式是23种设计模式中较为简单的一种。其模式保证实体类只能创建并返回唯一的一个对象，其结构需要保证 <strong>构造器私有化</strong> 和 <strong>静态方法返回对象</strong>，通过该类的唯一访问方式获得其唯一的对象，可以直接访问此方法，不需要实例化该类的对象。</p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><ul>
+<li><p><strong>方法一：饿汉模式</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">//构造器私有化</span>
+  <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">//该类的唯一对象</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> Singleton singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">//返回此对象</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>这种创建单例模式的方式体现在一个“饿”字，意思就是提前生成好该类的唯一对象，当用户想要此对象时，通过静态方法直接返回该对象。<br>优点：线程安全<br>缺点：如果用户用不到此类，则该创建对象的内存空间就被浪费了</p>
+</li>
+<li><p><strong>方法二：懒汉模式</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">//构造器私有化</span>
+  <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">//该类的唯一对象</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> Singleton singleton <span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">//返回此对象</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">else</span> <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>和饿汉模式类似，但其不同点在于突出“懒”字，不事先创建好该类的对象，而是当用户需要时再创建此对象。<br>优点：节省内存空间<br>缺点：线程不安全（可以通过synchronized进行加锁来解决，但会阻塞其他线程影响效率）</p>
+</li>
+<li><p><strong>方法三：双重锁模式</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">//构造器私有化</span>
+  <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">//该类的唯一对象</span>
+  <span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> Singleton singleton<span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">//返回此对象</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>Singleton<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>为了保证线程安全可以使用双重锁机制，如果多个线程进入if中，通过synchronized加锁机制保证只有一个线程来创建对象，其他线程通过volatile关键字进行同步避免JVM重排优化，从主存中拿到刚刚创建好的对象再返回。<br>优点：线程安全，节省内存空间</p>
+</li>
+<li><p><strong>方法四：静态内部类</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">//构造器私有化</span>
+  <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">//静态内部类创建对象</span>
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">SingletonInner</span><span class="token punctuation">{</span>
+      <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Singleton singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">//返回此对象</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> SingletonInner<span class="token punctuation">.</span>singleton<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>静态内部类只会在getInstance()方法被调用时才会初始化，解决了内存浪费的情况，同好保证了多线程的安全访问。<br>优点：线程安全，节省内存空间</p>
+</li>
+<li><p><strong>方法五：枚举类</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> Singleton <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">//唯一对象</span>
+  INSTANCE<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>枚举类自身优势可以保线程安全，同时隐藏了私有构造器，其中只要定义一个对象就能实现单例模式。实现较为简单。在单例模式的所有实现中，推荐使用此方法来实现。</p>
+</li>
 </ul>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>那么接下来就来看看Spring是如何实现IOC和DI的。首先，看一下整个项目的整体框架。<br><img src="/2019/10/18/spring-zhi-di/1.png" alt="项目框架"></p>
-<ul>
-<li>entity目录，存放实体类，分别有Car抽象类和Person抽象类。</li>
-<li>CarImpl目录和PersonImpl目录，分别存放Car的实现类和Person的实现类。</li>
-<li>main目录，存放主函数。</li>
-<li>resoucrces目录，存放资源配置，目前只存放spring的配置文件。</li>
-<li>pom.xml，maven的配置文件。</li>
-</ul>
-<p>然后，我们需要导入Spring框架所需要的包，一共有以下几种。<br><img src="/2019/10/18/spring-zhi-di/2.png" alt="依赖包结构"><br>其中spring-context包需要依赖右边四个包，所以我们只需要在maven中添加spring-context依赖就会自动导入Spring所有包。其pom.xml配置如下：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://maven.apache.org/POM/4.0.0<span class="token punctuation">"</span></span>
-         <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
-         <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modelVersion</span><span class="token punctuation">></span></span>4.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modelVersion</span><span class="token punctuation">></span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>spring<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.0-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-context<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.1.5.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project</span><span class="token punctuation">></span></span></code></pre>
-<h3 id="xml注入"><a href="#xml注入" class="headerlink" title="xml注入"></a>xml注入</h3><p>配置完Spring框架后，就要实现注入。首先先实现第一种注入方式xml注入。之前我们说过，要将对象的控制权交由Spring容器处理，如果使用xml实现，首先得创建一个spring xml的配置文件，其结构如下：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span>
-       <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
-       <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>beans</span><span class="token punctuation">></span></span></code></pre>
-<p>这是系统自动写好的开头，我们需要在beans标签中添加我们的对象。回到上一小节的例子，张三想要开车回家，那么我们首先要先获取车这个对象，那么我们先把所有车交由Spring管理。这里用到bean标签：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>carA<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity.CarImpl.CarA<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>carB<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity.CarImpl.CarB<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
-<p><bean>标签这里用到两个属性，第一个id即为实例的名字，第二个class即为你要交由Spring管理的类。这样我们就将A车和B车对象都交由Spring容器管理。接着我们需要一个ZhangSan对象，使用相同bean标签:</bean></p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ZhangSan<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity.PersonImpl.ZhangSan<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>car<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>carA<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
-<p>这里有所不同，id和class和上述一样，但在bean标签中还有constructor-arg子标签。我们想象一下，如果我们亲手new一个对象，就会使用到构造器，那么这里也同样的道理，在将对象创建时，有时可能会使用有参数的构造器，那么就会用到constructor-arg标签实现构造器注入，这个标签必须与类中构造器相匹配，即相当是调用这个构造器：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token keyword">extends</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-    ……
-
-    <span class="token function">ZhangSan</span><span class="token punctuation">(</span>Car car<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>car <span class="token operator">=</span> car<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    ……
-<span class="token punctuation">}</span></code></pre>
-<p>因为这里的car为引用类型，所以使用ref属性，其值carA指的是上面id=carA的对象。如果想要初始化的值为int等普通类型，则使用属性value，直接赋值。有时后可能没有在构造器中实现注入，还可以使用set方法注入：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ZhangSan<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity.PersonImpl.ZhangSan<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>car<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>carA<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
-<p>这里使用了property标签，必须要求类中有对应的set方法，效果和构造器注入相同，即相当于使用了这个方法：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token keyword">extends</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-
-    ……
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setCar</span><span class="token punctuation">(</span>Car car<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>car <span class="token operator">=</span> car<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    ……
-<span class="token punctuation">}</span></code></pre>
-<p>此时我们将carA、carB、ZhangSan都交由Spring管理，不用我们手动创建对象了，那么我们该如何拿到这些对象呢？在主函数中，分为两步：</p>
-<ul>
-<li>获取到Spring上下文</li>
-<li>从Spring上下文的容器中获取对象。</li>
-</ul>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//1、获取spring上下文</span>
-        ApplicationContext context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ClassPathXmlApplicationContext</span><span class="token punctuation">(</span><span class="token string">"spring-config.xml"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//2、获取ZhangSan对象</span>
-        Person ZhangSan <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">"ZhangSan"</span><span class="token punctuation">,</span> ZhangSan<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        ZhangSan<span class="token punctuation">.</span><span class="token function">goHome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-<p>其中 ClassPathXmlApplicationContext类从类名就可以看出，它是通过xml配置文件中加载Spring上下文的，所以只需把xml文件名传入就可以获取了上下文。得到Spring上下文，意味着得到了Spring的“心脏”，通过上下文的getBean()方法可以获取对象，其中第一个参数为之前配置的对象的id，第二个参数为实体类的class对象。接着就可以执行对应的方法得到结果：<br><img src="/2019/10/18/spring-zhi-di/3.png" alt="运行结果"><br>这就完成了xml实现注入，然而大量的配置文件总是麻烦的，在大多数情况下我们通常会使用第二种简洁的方法，用注解实现注入。</p>
-<h3 id="注解注入"><a href="#注解注入" class="headerlink" title="注解注入"></a>注解注入</h3><p>使用注解注入就不用大量配置xml文件了。直接定位到想要交由Spring管理的类，以CarA为例：</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"carA"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CarA</span> <span class="token keyword">extends</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
-
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is starting!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">turnLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is turning left!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">turnRight</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is turning right!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is stopping!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-<p>只需在CarA类名上面添加一个注解@Component就实现了相当于xml中的bean标签，其中的value即使实例的名字，相当于xml中的id。对比复杂的xml配置，注解的方式清晰明了。同样对于ZhangSan类：</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span><span class="token punctuation">(</span><span class="token string">"ZhangSan"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token keyword">extends</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-
-    <span class="token annotation punctuation">@Autowired</span>
-    <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"carA"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> Car car<span class="token punctuation">;</span>
-
-    <span class="token function">ZhangSan</span><span class="token punctuation">(</span>Car car<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>car <span class="token operator">=</span> car<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    ……
-<span class="token punctuation">}</span></code></pre>
-<p>通过@Component注解把ZhangSan类交由Spring管理，然后直接在Car的属性上添加注解实现初始化。@Autowired注解可以实现自动注入，它会从Spring容器中寻找与此类型相匹配的对象注入进去，在Spring容器中我们有CarA和CarB都可以注入，此时存在不唯一性，于是使用@Qualifier注解实现指定注入，这里我们要求张三开A车回家，就指定value = CarA进行注入。</p>
-<p>此时把所有对象都交由Spring容器管理，最后还需修改一点点xml文件。</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-&lt;beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation=
-               "http://www.springframework.org/schema/beans
-                http://www.springframework.org/schema/beans/spring-beans.xsd
-                http://www.springframework.org/schema/context
-                http://www.springframework.org/schema/context/spring-context.xsd">
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">context:</span>component-scan</span> <span class="token attr-name">base-package</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>entity<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>beans</span><span class="token punctuation">></span></span></code></pre>
-<p>标签context:component-scan的作用是开启注解扫描，base-package为扫描范围。我们对entity包下全部扫描，就可以实现自动扫描注解然后将对象放入Spring容器中。需要注意的一点是此标签在context包中，所以beans标签中需要添加context相关的命名空间。xml配置好了后，到主函数，主函数无需任何改动直接运行，就可以得到与xml注入相同的效果。</p>
-<p>以上就是Spring中的IOC和DI的基本使用方法。</p>
 
             </div>
             <hr/>
@@ -583,7 +520,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2019/10/18/spring-zhi-di/">http://yoursite.com/2019/10/18/spring-zhi-di/</a>
+                    <a href="http://yoursite.com/2019/10/26/xiang-jie-she-ji-mo-shi-dan-li-mo-shi/">http://yoursite.com/2019/10/26/xiang-jie-she-ji-mo-shi-dan-li-mo-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -621,12 +558,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Spring/">
-                                    <span class="chip bg-color">Spring</span>
-                                </a>
-                            
-                                <a href="/tags/DI/">
-                                    <span class="chip bg-color">DI</span>
+                                <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+                                    <span class="chip bg-color">单例模式</span>
                                 </a>
                             
                         </div>
@@ -929,24 +862,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/10/18/ren-yue-ping-heng-de-ao-mi/">
+                <a href="/2019/10/26/kai-yuan-wen-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="人月平衡的奥秘">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="开源文化">
                         
-                        <span class="card-title">人月平衡的奥秘</span>
+                        <span class="card-title">开源文化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            人月是危险和带有欺骗性的神话，因为它暗示人员数量和时间是可以相互替换的。 -《人月神话》
+                            由程序员和无政府主义者组成的快乐的网络部落，战胜和压倒了等级森严的传统闭源软件世界。 ——《大教堂与集市》
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-18
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-26
                         </span>
                         <span class="publish-author">
                             
@@ -963,8 +896,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E3%80%8A%E4%BA%BA%E6%9C%88%E7%A5%9E%E8%AF%9D%E3%80%8B/">
-                        <span class="chip bg-color">《人月神话》</span>
+                    <a href="/tags/%E3%80%8A%E5%A4%A7%E6%95%99%E5%A0%82%E4%B8%8E%E9%9B%86%E5%B8%82%E3%80%8B/">
+                        <span class="chip bg-color">《大教堂与集市》</span>
                     </a>
                     
                 </div>
@@ -978,31 +911,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/18/spring-zhi-ioc/">
+                <a href="/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Spring之IOC思想">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="详解String中的intern()方法">
                         
-                        <span class="card-title">Spring之IOC思想</span>
+                        <span class="card-title">详解String中的intern()方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Inversion of Control（IOC）是Spring的两大核心思想之一，其不是一种技术，而是一种降低程序耦合的设计思想。
+                            String中的intern()方法在不同的JDK版本中会产生不同的效果。那么又哪些区别呢？
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-21
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
                                 </a>
                             
                             
@@ -1012,12 +945,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
-                    </a>
-                    
-                    <a href="/tags/IOC/">
-                        <span class="chip bg-color">IOC</span>
+                    <a href="/tags/String/">
+                        <span class="chip bg-color">String</span>
                     </a>
                     
                 </div>
