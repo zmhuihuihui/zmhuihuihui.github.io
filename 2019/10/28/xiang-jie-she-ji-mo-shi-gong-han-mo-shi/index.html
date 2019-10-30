@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="详解String中的intern()方法, 灰灰灰灰">
-    <meta name="description" content="String基础知识在Java中创建String对象有两种方法分别为：
-String a = &#34;123&#34;;
-String b = new String(&#34;456&#34;);
-这两种方法有什么本质的区别呢？先来看看 String a = “123”">
+    <meta name="keywords" content="详解设计模式—工厂模式, 灰灰灰灰">
+    <meta name="description" content="工厂模式概述工厂模式分为两种：工厂方法和抽象工厂。由于简单工厂并不属于GoF的23种设计模式之一，所以我没有把简单工厂列入工厂模式。但不管是工厂方法还是抽象工厂都是在简单工厂的基础上增加了可扩展性。他们都属于设计模式中创建型的模式，其主要功">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +13,7 @@ String b = new String(&#34;456&#34;);
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>详解String中的intern()方法 | 灰灰灰灰</title>
+    <title>详解设计模式—工厂模式 | 灰灰灰灰</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -244,13 +241,13 @@ String b = new String(&#34;456&#34;);
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        详解String中的intern()方法
+                        详解设计模式—工厂模式
                     </div>
                 </div>
             </div>
@@ -362,8 +359,8 @@ String b = new String(&#34;456&#34;);
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/String/">
-                                <span class="chip bg-color">String</span>
+                            <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                                <span class="chip bg-color">工厂模式</span>
                             </a>
                         
                     </div>
@@ -374,8 +371,8 @@ String b = new String(&#34;456&#34;);
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Java/" class="post-category">
-                                Java
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                设计模式
                             </a>
                         
                     </div>
@@ -386,21 +383,21 @@ String b = new String(&#34;456&#34;);
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-21
+                    2019-10-28
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.2k
+                        1.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        5 分
                     </div>
                     
                 
@@ -411,60 +408,117 @@ String b = new String(&#34;456&#34;);
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="String基础知识"><a href="#String基础知识" class="headerlink" title="String基础知识"></a>String基础知识</h3><p>在Java中创建String对象有两种方法分别为：</p>
-<pre class=" language-java"><code class="language-java">String a <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">;</span>
-String b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"456"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>这两种方法有什么本质的区别呢？先来看看 <strong>String a = “123”</strong> ;是如何生成的，其主要步骤分为两步：<br>1、判断常量池有没有“123”对象<br>2、如果有，a直接指向“123”；如果没有，在常量池创建“123”对象，然后使a指向。<br><img src="/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/1.png" alt="直接赋值过程"><br>由于之前常量池没有“123”对象，所以就创建一个并使a指向它。 </p>
-<p>接着，来看看String b = new String(“456”);是如何创建的，其主要步骤也分为两步：<br>1、在堆内存中单独开辟出一个内存空间存放“456”对象，使b指向它。<br>2、如果常量池中没有“456”对象则创建，如果有则不创建。<br><img src="/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/2.png" alt="new创建过程"></p>
-<p>在了解两种不同的创建String类的方法，就可以得到以下两个结论：</p>
+                <h3 id="工厂模式概述"><a href="#工厂模式概述" class="headerlink" title="工厂模式概述"></a>工厂模式概述</h3><p>工厂模式分为两种：工厂方法和抽象工厂。由于简单工厂并不属于GoF的23种设计模式之一，所以我没有把简单工厂列入工厂模式。但不管是工厂方法还是抽象工厂都是在简单工厂的基础上增加了可扩展性。他们都属于设计模式中创建型的模式，其主要功能是将对象的实例化过程抽取出来，目的就是为了降低系统中代码的耦合度，增强系统的可扩展性。</p>
+<h3 id="情景回顾"><a href="#情景回顾" class="headerlink" title="情景回顾"></a>情景回顾</h3><p>在<a href="https://zmhuihuihui.github.io/2019/10/26/xiang-jie-she-ji-mo-shi-jian-dan-gong-han/" target="_blank" rel="noopener">简单工厂</a>中，我们模拟了用户购买电脑的场景，用户直接与ComputerFactory类打交道就可以拿到自己想要型号的电脑，其UML图如下：<br><img src="/2019/10/28/xiang-jie-she-ji-mo-shi-gong-han-mo-shi/1.png" alt="简单工厂UML"><br>但在传统的简单工厂的实现中，如果想要添加不同型号的电脑就需要在ComputerFactory类中修改，这违背了 <strong><em>开闭原则</em></strong> ，不利于系统的可扩展性。因此，针对不同的 <strong>产品等级</strong> 的可扩展，提出了工厂方法。</p>
+<h3 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h3><p>工厂方法的核心思想就是：</p>
+<blockquote>
+<p><strong>在简单工厂的基础上，让类的实例化推迟到子类实现。</strong></p>
+</blockquote>
+<p>对比简单工厂可以发现，在简单工厂中对象的实例化操作是在ComputerFactory类中进行的。而工厂方法的思想就是这个实例化过程推迟到了ComputerFactory子类实现，其UML图如下：<br><img src="/2019/10/28/xiang-jie-she-ji-mo-shi-gong-han-mo-shi/2.png" alt="工厂方法UML"><br>可以看到，工厂方法将ComputerFactory类提升到了抽象类，其子类为不同电脑商家的工厂，这样保证了各自的工厂产各自的电脑，而不像简单工厂中的ComputerFactory类可以产出所有商家的电脑，当有新类型的电脑出现，只要添加生产该类型电脑的工厂即可，不需要对原来的代码进行修改。因此使用工厂方法，满足了开闭原则，大大提高了可扩展性。<br>工厂的具体的实现如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//生产电脑的抽象生厂</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">computerFactory</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> Computer <span class="token function">createComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//生产mac的工厂</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">macFactory</span> <span class="token keyword">extends</span> <span class="token class-name">computerFactory</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Computer <span class="token function">createComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">macComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//生产windows的工厂</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">winFactory</span> <span class="token keyword">extends</span> <span class="token class-name">computerFactory</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Computer <span class="token function">createComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">winComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>客户端实现如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        computerFactory factory <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">macFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//生产何种电脑取决于实现何种工厂</span>
+        Computer computer <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">createComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        computer<span class="token punctuation">.</span><span class="token function">displayModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//mac</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>工厂方法有以下几个的优点：</p>
 <ul>
-<li>使用直接赋值，如果对象内容是一样的，则引用地址也是一样的。</li>
-<li>使用new赋值，即使对象内容是一样的，引用地址也是不一样的。</li>
+<li>用户只需要关心具体的工厂，而不用关心产品创建的细节</li>
+<li>符合开闭原则的设计，提高可扩展性</li>
 </ul>
-<pre class=" language-java"><code class="language-java">String a <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">;</span>
-String b <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">==</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//true</span>
-
-
-String c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"123"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String d <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"123"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c <span class="token operator">==</span> d<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//false</span></code></pre>
-<h3 id="解析intern-方法"><a href="#解析intern-方法" class="headerlink" title="解析intern()方法"></a>解析intern()方法</h3><p>在String中有一个intern()方法，用到的地方不是很多。其方法的作用涉及到底层JVM。并且在不同版本JDK中，得到的结果也不一样。</p>
-<p>在 <strong>JDK1.6及以前</strong> ，intern()方法是这样描述的：</p>
+<p>同样，工厂方法有以下几个的缺点：</p>
+<ul>
+<li>工厂类的个数容易过多，增加复杂度</li>
+<li>增加了系统的抽象性与理解难度</li>
+</ul>
+<h3 id="情景升级"><a href="#情景升级" class="headerlink" title="情景升级"></a>情景升级</h3><p>现在在原有情景的基础上，用户又想购买手机，市面上同样有两种类型的手机分别为Apple和Android。</p>
+<p>之前的工厂方法，我们知道应该要创建一个phoneFactory抽象类，然后实现不同的手机工厂生产不同的手机，流程同之前如出一辙。但如果此时用户想要购买苹果商家的pad、耳机、鼠标、键盘……一系列的东西，如果还使用工厂方法就会产生“类爆炸”的情况，我们需要创建大量的工厂类，这大大的提高了代码的复杂度和冗余度。因此，面对的不同 <strong>产品族</strong> 的可扩展性，提出了抽象工厂。</p>
+<h3 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h3><p>抽象工厂的定义如下：</p>
 <blockquote>
-<p>当字符串在常量池存在时，则返回常量池中的字符串；当字符串在常量池不存在时，则在常量池中 <strong><em>拷贝</em></strong> 一份，然后再返回常量池中的字符串。</p>
+<p><strong>抽象工厂提供了一个创造一系列相关对象或相互依赖对象的接口</strong></p>
 </blockquote>
-<p>还是拿之前的两种不同创建方式为例，分别调用其intern()方法由于两种创建对象的方法都会在常量池中有一份字符串，所以直接返回常量池对象。区别在于，返回的引用地址不同，其过程如下：<br><img src="/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/3.png" alt="两种方式分别调用intern()"></p>
-<pre class=" language-java"><code class="language-java">String a <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">;</span>
-String m <span class="token operator">=</span> a<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">==</span> m<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//true</span>
+<p>何为同一系列的相关对象？在上面的场景中，可以理解为同一家公司的产品。也就是说如果是同一家公司的产品，就可以封装在一起，而没有必要像工厂方法一样为每一个产品创建一个工厂。其UML图如下：<br><img src="/2019/10/28/xiang-jie-she-ji-mo-shi-gong-han-mo-shi/3.png" alt="抽象工厂"><br>从UML中看出，现在多了一个产品手机。不同与工厂方法的是，并没有创建computerFactory和phoneFactory类。而是一个ElectronicFactory抽象类，其子类为不同的公司的工厂，不同公司负责生产各自公司的产品。这样，如果想要某个公司的产品，直接实现该对应公司的工厂就可以。</p>
+<p>工厂的具体实现如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//抽象工厂</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">ElectronicFactory</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//生产电脑</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> Computer <span class="token function">createComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//生产手机</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> Phone <span class="token function">createPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//苹果公司的工厂</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AppleFactory</span> <span class="token keyword">extends</span> <span class="token class-name">ElectronicFactory</span> <span class="token punctuation">{</span>
 
-String b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"456"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String n <span class="token operator">=</span> b<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>b <span class="token operator">==</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//false</span></code></pre>
-<p>之前的例子是已经在常量池中存在字符串了，相对容易理解一些。还存在一种可能就是常量池如果没有字符串，看以下的例子：</p>
-<pre class=" language-java"><code class="language-java">String a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String b <span class="token operator">=</span> a<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">==</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//false</span></code></pre>
-<p>这个过程又如何理解呢？一步一步来分析，首先第一行String a = new String(“1”)+new String(“2”);应分分为三步来完成：<br>1、分别在堆内存和常量池创建“1”字符串<br>2、分别在堆内存和常量池创建“2”字符串<br>3、运算加法，在堆内存中创建“12”字符串（注意：加法由StringBuffer实现，并不会在常量池中也创建）<br><img src="/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/4.png" alt="第一行运算结果示意图"><br>此时，走到第二步a.intern();根据上面在JDK1.6的定义，是在常量池中拷贝一份“12”字符串，然后将字符串返回给b。<br><img src="/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/5.png" alt="第二行运算结果示意图"><br>可以清楚的看到a和b的引用地址并不一样，所以上面代码返回false。</p>
-<p>此时再来看看 <strong>JDK1.6以后</strong> 是如何定义intern()方法的：</p>
-<blockquote>
-<p>当字符串在常量池存在时，则返回常量池中的字符串；当字符串在常量池不存在时，则把 <strong><em>堆内存中此对象引用添加到常量池中</em></strong> ，然后再返回此引用。</p>
-</blockquote>
-<p>前半句话，和JDK1.6及以前一摸一样，关键的变化在于后半句话。因此，如果字符串已经在常量池中的话，是和JDK1.6及以前没有任何区别的。所以仍然满足：</p>
-<pre class=" language-java"><code class="language-java">String a <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">;</span>
-String m <span class="token operator">=</span> a<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">==</span> m<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//true</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Computer <span class="token function">createComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">MacComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-String b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"456"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String n <span class="token operator">=</span> b<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>b <span class="token operator">==</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//false</span></code></pre>
-<p>但当常量池中没有字符串时情况就发生了变化,还是以上述的例子为例：</p>
-<pre class=" language-java"><code class="language-java">String a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String b <span class="token operator">=</span> a<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">==</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//true</span></code></pre>
-<p>此时看到，答案与之前不同了，那么整个过程与之前发生了怎样的变化，同样一步一步来分析，第一步是一样的：<br> <img src="/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/6.png" alt="第一行运算结果示意图"><br> 当执行到第二步 String b = a.intern();时就发生了变化：<br> <img src="/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/7.png" alt="第二行运算结果示意图"><br> 可以看到，区别就在于在JDK1.6及以前是将 <strong>堆内存的对象拷贝一份到常量池中</strong>，而在JDK1.6以后是将 <strong>此对象的引用放入常量池中</strong>。所以JDK1.6以后，实际上b指向的是堆内存中的“12”，即和a指向是相同的，所以上述代码返回的是true。</p>
-<p> 综上，在JDK1.6以后通过优化了intern()方法，可以有效的减少内存的占用，提高运行时的性能。</p>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Phone <span class="token function">createPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ApplePhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//微软公司的工厂</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MicrosoftFactory</span> <span class="token keyword">extends</span> <span class="token class-name">ElectronicFactory</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Computer <span class="token function">createComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">WinComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Phone <span class="token function">createPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">AndroidPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>客户端的实现如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ElectronicFactory factory <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AppleFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Computer computer <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">createComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Phone phone <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">createPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        computer<span class="token punctuation">.</span><span class="token function">displayModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//mac</span>
+        phone<span class="token punctuation">.</span><span class="token function">displayModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//apple phone</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>抽象工厂有以下几个优点：</p>
+<ul>
+<li>用户只需要关心具体的工厂，而不用关心产品创建的细节</li>
+<li>将一个系列的产品族统一到一起创建</li>
+</ul>
+<p>同样，抽象工厂有以下几个的缺点：</p>
+<ul>
+<li>想要在一个产品族中扩展新的产品需要修改原来工厂中的代码，不符合开闭原则。</li>
+<li>增加了系统的抽象性与理解难度</li>
+</ul>
+<h3 id="对比工厂方法和抽象工厂"><a href="#对比工厂方法和抽象工厂" class="headerlink" title="对比工厂方法和抽象工厂"></a>对比工厂方法和抽象工厂</h3><p>此时，我们来对比下工厂方法和抽象工厂。通过上述的例子我们发现，其实工厂方法和抽象工厂的关注点是不一样。</p>
+<p>工厂方法关注的是 <strong>产品等级</strong>，何为产品等级？即不同商家产出的同类型的商品属于统一产品等级。<br>抽象工厂关注的是 <strong>产品族</strong>，何为产品族？即同一商家产出的不同类型的商品属于同一产品族。</p>
+<p>如果确定了产品族和其产品等级，那么也就唯一确定了产品。</p>
+<p>因此，对于不同的业务场景，工厂方法和抽象工厂各有优劣。例如，如果业务场景更多的强调的是不同的商品，那么使用工厂方法会更好一些；如果业务场景更多的强调的是不同的公司下的产品，则抽象工厂更好一些。</p>
 
             </div>
             <hr/>
@@ -491,7 +545,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/">http://yoursite.com/2019/10/21/xiang-jie-string-zhong-de-intern-fang-fa/</a>
+                    <a href="http://yoursite.com/2019/10/28/xiang-jie-she-ji-mo-shi-gong-han-mo-shi/">http://yoursite.com/2019/10/28/xiang-jie-she-ji-mo-shi-gong-han-mo-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -529,8 +583,8 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/String/">
-                                    <span class="chip bg-color">String</span>
+                                <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                                    <span class="chip bg-color">工厂模式</span>
                                 </a>
                             
                         </div>
@@ -829,29 +883,80 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/26/xiang-jie-she-ji-mo-shi-dan-li-mo-shi/">
+                <a href="/2019/10/28/xiang-jie-she-ji-mo-shi-gong-han-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="详解设计模式—单例模式">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="详解设计模式—工厂模式">
                         
-                        <span class="card-title">详解设计模式—单例模式</span>
+                        <span class="card-title">详解设计模式—工厂模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            单例模式是23种设计模式中较为简单的一种,其设计模式保证实体类只能创建并返回唯一的一个对象。
+                            工厂模式分为工厂方法和抽象工厂,其主要功能是将对象的实例化过程抽取出来，目的是为了降低代码的耦合度，增强系统的可扩展性。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-26
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">工厂模式</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/26/xiang-jie-she-ji-mo-shi-jian-dan-gong-han/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="详解设计模式—简单工厂">
+                        
+                        <span class="card-title">详解设计模式—简单工厂</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            简单工厂严格来说并不属于GoF的23种设计模式之一，但工厂方法和抽象工厂都是在简单工厂的基础上衍生出来。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-26
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -867,57 +972,8 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">单例模式</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/10/21/java-zhong-hashmap-de-shi-xian-yuan-li/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Java中HashMap的实现原理">
-                        
-                        <span class="card-title">Java中HashMap的实现原理</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            HashMap是基于哈希表实现的一种数据结构,每一个元素以<key,value>键值对的形式存储在HashMap结构中。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-21
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/HashMap/">
-                        <span class="chip bg-color">HashMap</span>
+                    <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">工厂模式</span>
                     </a>
                     
                 </div>
