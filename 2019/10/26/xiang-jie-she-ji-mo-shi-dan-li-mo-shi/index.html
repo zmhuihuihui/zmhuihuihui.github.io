@@ -391,14 +391,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        708
+                        2.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        8 分
                     </div>
                     
                 
@@ -409,91 +409,229 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="单例模式概述"><a href="#单例模式概述" class="headerlink" title="单例模式概述"></a>单例模式概述</h2><p>单例模式是23种设计模式中较为简单的一种。其模式保证实体类只能创建并返回唯一的一个对象，其结构需要保证 <strong>构造器私有化</strong> 和 <strong>静态方法返回对象</strong>，通过该类的唯一访问方式获得其唯一的对象，可以直接访问此方法，不需要实例化该类的对象。</p>
-<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><ul>
-<li><p><strong>方法一：饿汉模式</strong></p>
+                <h3 id="单例模式概述"><a href="#单例模式概述" class="headerlink" title="单例模式概述"></a>单例模式概述</h3><p>单例模式是23种设计模式中较为简单的一种。其模式保证实体类只能创建并返回唯一的一个对象，其结构需要保证 <strong>构造器私有化</strong> 和 <strong>静态方法返回对象</strong>，通过该类的唯一访问方式获得其唯一的对象，可以直接访问此方法，不需要实例化该类的对象。</p>
+<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><ul>
+<li><strong>方法一：饿汉模式</strong></li>
+</ul>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
 
-  <span class="token comment" spellcheck="true">//构造器私有化</span>
-  <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//构造器私有化</span>
+    <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-  <span class="token comment" spellcheck="true">//该类的唯一对象</span>
-  <span class="token keyword">private</span> <span class="token keyword">static</span> Singleton singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//该类的唯一对象</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> Singleton singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token comment" spellcheck="true">//返回此对象</span>
-  <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-      <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//返回此对象</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>这种创建单例模式的方式体现在一个“饿”字，意思就是提前生成好该类的唯一对象，当用户想要此对象时，通过静态方法直接返回该对象。<br>优点：线程安全<br>缺点：如果用户用不到此类，则该创建对象的内存空间就被浪费了</p>
-</li>
-<li><p><strong>方法二：懒汉模式</strong></p>
+<ul>
+<li><strong>方法二：懒汉模式</strong></li>
+</ul>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
 
-  <span class="token comment" spellcheck="true">//构造器私有化</span>
-  <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//构造器私有化</span>
+    <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-  <span class="token comment" spellcheck="true">//该类的唯一对象</span>
-  <span class="token keyword">private</span> <span class="token keyword">static</span> Singleton singleton <span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//该类的唯一对象</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Singleton singleton <span class="token punctuation">;</span>
 
-  <span class="token comment" spellcheck="true">//返回此对象</span>
-  <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-      <span class="token keyword">if</span><span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">else</span> <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//返回此对象</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>和饿汉模式类似，但其不同点在于突出“懒”字，不事先创建好该类的对象，而是当用户需要时再创建此对象。<br>优点：节省内存空间<br>缺点：线程不安全（可以通过synchronized进行加锁来解决，但会阻塞其他线程影响效率）</p>
-</li>
-<li><p><strong>方法三：双重锁模式</strong></p>
+<ul>
+<li><strong>方法三：双重锁模式</strong></li>
+</ul>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
 
-  <span class="token comment" spellcheck="true">//构造器私有化</span>
-  <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//构造器私有化</span>
+    <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
 
-  <span class="token comment" spellcheck="true">//该类的唯一对象</span>
-  <span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> Singleton singleton<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//该类的唯一对象</span>
+    <span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> Singleton singleton<span class="token punctuation">;</span>
 
-  <span class="token comment" spellcheck="true">//返回此对象</span>
-  <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>Singleton<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-              <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span>
-      <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//返回此对象</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>Singleton<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>为了保证线程安全可以使用双重锁机制，如果多个线程进入if中，通过synchronized加锁机制保证只有一个线程来创建对象，其他线程通过volatile关键字进行同步避免JVM重排优化，从主存中拿到刚刚创建好的对象再返回。<br>优点：线程安全，节省内存空间</p>
-</li>
-<li><p><strong>方法四：静态内部类</strong></p>
+<p>为了保证线程安全可以使用双重锁机制。可以通过对创建对象的过程加锁实现线程安全，在上述实现中，没有对getInstance()方法直接加锁是因为这个方法是静态方法，对静态方法加锁相当于对整个类加锁。因此在if判断后加锁，如果多个线程进入if中，只会有一个线程来创建对象，其他对象会阻塞。</p>
+<p>但仅仅通过加锁会出现一个问题，无法解决可能出现的重排序问题。<strong>重排序</strong> 是指编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段。例如上述在创建Singleton对象时，正常创建流程分为三步：<br>1、为Singleton对象分配内存<br>2、Singleton对象执行初始化<br>3、让singleton引用指向Singleton对象</p>
+<p>但有一定几率编译器可能会对上述步骤进行重排序，会先执行第三步再执行第二步。这时就会出现问题，如果一个线程在创建对象的过程中执行了第三步而还没执行第二步，此时第二个线程在if判断时就为非空，直接就返回了此对象，然而事实这个对象还没被初始化，因此就会抛出异常。</p>
+<p>为了避免上述产生的问题，需要在Singleton对象前添加volatile关键词，有了这个关键词就可以禁止编译器在创建该类时使用重排序。</p>
+<p>优点：线程安全，节省内存空间</p>
+<ul>
+<li><strong>方法四：静态内部类</strong></li>
+</ul>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
 
-  <span class="token comment" spellcheck="true">//构造器私有化</span>
-  <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//构造器私有化</span>
+    <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
 
-  <span class="token comment" spellcheck="true">//静态内部类创建对象</span>
-  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">SingletonInner</span><span class="token punctuation">{</span>
-      <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Singleton singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//静态内部类创建对象</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">SingletonInner</span><span class="token punctuation">{</span>
+        <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Singleton singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-  <span class="token comment" spellcheck="true">//返回此对象</span>
-  <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">return</span> SingletonInner<span class="token punctuation">.</span>singleton<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//返回此对象</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> SingletonInner<span class="token punctuation">.</span>singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>静态内部类只会在getInstance()方法被调用时才会初始化，解决了内存浪费的情况，同好保证了多线程的安全访问。<br>优点：线程安全，节省内存空间</p>
-</li>
-<li><p><strong>方法五：枚举类</strong></p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> Singleton <span class="token punctuation">{</span>
+<ul>
+<li><strong>方法五：枚举类</strong></li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> EnumSingleton <span class="token punctuation">{</span>
+    INSTANCE<span class="token punctuation">;</span>
 
-  <span class="token comment" spellcheck="true">//唯一对象</span>
-  INSTANCE<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> EnumSingleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> INSTANCE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>枚举类自身优势可以保线程安全，同时隐藏了私有构造器，其中只要定义一个对象就能实现单例模式。实现较为简单。在单例模式的所有实现中，推荐使用此方法来实现。</p>
-</li>
-</ul>
+<h3 id="单例模式中存在问题"><a href="#单例模式中存在问题" class="headerlink" title="单例模式中存在问题"></a>单例模式中存在问题</h3><p>在实际业务场景中，使用单例模式的过程中可能会有以下几个问题。</p>
+<p><strong><em>1、使用序列化和反序列化会破坏单例模式。</em></strong></p>
+<p>序列化即将对象转换为字节序列。反序列化即将字节序列转换为对象，使用序列化和反序列化可以使对象用于进程之间的通讯传输。在这个过程中，单例模式会出现问题(枚举类方法除外)，接下来通过饿汉模式来模拟下这个出错的过程，其代码如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//饿汉模式，实现序列化接口</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HungrySingleton</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//构造器私有化</span>
+    <span class="token keyword">private</span> <span class="token function">HungrySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//该类的唯一对象</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> HungrySingleton singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HungrySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//返回此对象</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> HungrySingleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+
+        HungrySingleton oldSingleton <span class="token operator">=</span> HungrySingleton<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//序列化，将该对象存入文件</span>
+        ObjectOutputStream oos <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ObjectOutputStream</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span><span class="token string">"test.txt"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        oos<span class="token punctuation">.</span><span class="token function">writeObject</span><span class="token punctuation">(</span>oldSingleton<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        oos<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//反序列化，从文件中取出该对象</span>
+        ObjectInputStream ois <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ObjectInputStream</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span><span class="token string">"test.txt"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        HungrySingleton newSingleton <span class="token operator">=</span> <span class="token punctuation">(</span>HungrySingleton<span class="token punctuation">)</span> ois<span class="token punctuation">.</span><span class="token function">readObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ois<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>oldSingleton<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>newSingleton<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>在主函数中，通过ObjectOutputStream流将对象存入test.txt文件，然后通过ObjectInputStream流再将对象取出来。按照我们预期的结果，应该oldSingleton和newSingleton为同一对象，但实际却是两个不同对象：<br><img src="/2019/10/26/xiang-jie-she-ji-mo-shi-dan-li-mo-shi/1.png" alt="序列化破坏"><br>那么为什么与我们预期的结果不一样呢？因为序列化不是本篇文章的重点，所以这里就简单分析一下。</p>
+<p>在上述代码中通过ObjectInputStream的readObject()方法来获取文件中的对象，而实际在readObject()方法源码中，会判断该Class是否实现了serializable或externalizable接口，如果实现了则会通过反射机制重新创建一个新的实例并返回。所以就会出现我们从文件中拿到的对象并不是之前放入的对象，那么该怎么防止序列化对单例模式的破坏呢？</p>
+<p>只需要在类中添加一个readResolve()方法，其实现如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//饿汉模式，实现序列化接口</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HungrySingleton</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//构造器私有化</span>
+    <span class="token keyword">private</span> <span class="token function">HungrySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//该类的唯一对象</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> HungrySingleton singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HungrySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//返回此对象</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> HungrySingleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//防止序列化的破坏</span>
+    <span class="token keyword">public</span> Object <span class="token function">readResolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p><img src="/2019/10/26/xiang-jie-she-ji-mo-shi-dan-li-mo-shi/2.png" alt="防止序列化破坏"><br>仅通过在类中添加readResolve()方法，就可以达到防止序列化对单例模式的破坏。其原理如下，在上面讲到readResolve()方法会通过反射拿到一个新的对象，但这个对象不会立马返回，之后还会判断该类中是否有readResolve()方法（方法名不可改），如果有就会调用该方法然后拿到我们创建好的唯一对象并返回。这样就确保了在序列化过程中单例模式的正常使用。以下截取一段ObjectInputStream类中readOrdinaryObject()方法中的关键源码,加深下理解：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> Object <span class="token function">readOrdinaryObject</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> unshared<span class="token punctuation">)</span><span class="token keyword">throws</span> IOException
+<span class="token punctuation">{</span>
+     ……
+
+  Object obj<span class="token punctuation">;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+      obj <span class="token operator">=</span> desc<span class="token punctuation">.</span><span class="token function">isInstantiable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> desc<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> null<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//isInstantiable返回true，通过反射拿到新对象</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">throw</span> <span class="token punctuation">(</span>IOException<span class="token punctuation">)</span> <span class="token keyword">new</span> <span class="token class-name">InvalidClassException</span><span class="token punctuation">(</span>desc<span class="token punctuation">.</span><span class="token function">forClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">"unable to create instance"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">initCause</span><span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+     ……
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> handles<span class="token punctuation">.</span><span class="token function">lookupException</span><span class="token punctuation">(</span>passHandle<span class="token punctuation">)</span> <span class="token operator">==</span> null
+      <span class="token operator">&amp;&amp;</span> desc<span class="token punctuation">.</span><span class="token function">hasReadResolveMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>   <span class="token comment" spellcheck="true">//通过这个名字就可以看出判断是否有readResolve()方法</span>
+        Object rep <span class="token operator">=</span> desc<span class="token punctuation">.</span><span class="token function">invokeReadResolve</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//调用我们写的readResolve()拿到唯一对象</span>
+
+            ……
+
+        handles<span class="token punctuation">.</span><span class="token function">setObject</span><span class="token punctuation">(</span>passHandle<span class="token punctuation">,</span> obj <span class="token operator">=</span> rep<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//将上面obj重新指向这个唯一对象</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> obj<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p><strong><em>2、使用反射会破坏单例模式。</em></strong></p>
+<p>反射可以通过Class对象直接创建实例（枚举类方法除外），这违背了单例模式创建唯一对象的原则。因此，需要在单例模式中添加反射防御，在懒汉模式和匿名内部类两个方式中，可以有效的防止反射。但在饿汉模式和双重锁模式中无法有效的防御。原因是前两个方法中的对象在类加载的时候就分配好，而后两种则得等到使用时才分配内存。</p>
+<p>以饿汉模式为例，如何防止反射：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HungrySingleton</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//构造器私有化,并且禁止反射</span>
+    <span class="token keyword">private</span> <span class="token function">HungrySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>singleton <span class="token operator">!=</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token string">"禁止反射"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//该类的唯一对象</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> HungrySingleton singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HungrySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//返回此对象</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> HungrySingleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//破话序列化</span>
+    <span class="token keyword">public</span> Object <span class="token function">readResolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>在私有构造器中，如果反射想要通过构造器来生成一个新的对象则会抛出异常。在主函数中测试如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//获得Class对象</span>
+        Class <span class="token class-name">clazz</span> <span class="token operator">=</span> HungrySingleton<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//获得构造器对象</span>
+        Constructor constructor <span class="token operator">=</span> clazz<span class="token punctuation">.</span><span class="token function">getDeclaredConstructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//开放构造器权限</span>
+        constructor<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        HungrySingleton singleton1 <span class="token operator">=</span> <span class="token punctuation">(</span>HungrySingleton<span class="token punctuation">)</span> constructor<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        HungrySingleton singleton2 <span class="token operator">=</span> HungrySingleton<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>singleton1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>singleton2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p><img src="/2019/10/26/xiang-jie-she-ji-mo-shi-dan-li-mo-shi/3.png" alt="防止反射"><br>同样，可以在静态内部类中添加反射防御。而在饿汉模式和双重锁模式却无法防御，因为对象内存的分配时间是不确定的，无法确定是反射先创建对象还是方法先创建对象。</p>
+<p>综上所述，在使用单例模式过程中应该时刻注意序列化和反射攻击，在《Efftctive Java》这本书中，推荐使用枚举类来实现单例模式，因为枚举类具有天生防御序列化和反射的能力，并且语法简单，容易使用。</p>
 
             </div>
             <hr/>
@@ -1137,7 +1275,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">19k</span>&nbsp;字
+                class="white-color">20.7k</span>&nbsp;字
             
             
             
