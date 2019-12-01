@@ -449,7 +449,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>上述实现只是在分析了场景后逻辑上的实现。但仔细观察会发现很多问题。首先List中存放的应该是统一的对象，所以对于不用类型的Observer应该抽象出一个接口，不同的Observer只需实现其不同update()方法。类似的，对于Subject来说，也同样可以抽象出一个接口，供交通局等其他地方使用。抽象出Subject和Observer接口hou，将耦合变为了抽象耦合，大大减少了原来的耦合程度。</p>
-<p>于是，就有了完整的构造者模式的UML图：<br><img src="/2019/10/19/xiang-jie-she-ji-mo-shi-guan-cha-zhe-mo-shi/3.png" alt="观察者模式类图"></p>
+<p>于是，就有了完整的观察者模式的UML图：<br><img src="/2019/10/19/xiang-jie-she-ji-mo-shi-guan-cha-zhe-mo-shi/3.png" alt="观察者模式类图"></p>
 <h3 id="Java官方实现"><a href="#Java官方实现" class="headerlink" title="Java官方实现"></a>Java官方实现</h3><p>在Java中在util包中，官方提供给了内置的观察者模式，分别为Observable类和Observer接口。</p>
 <p>Observer类相当于Subject接口，相对于之前的Subject接口多了一个setChanged()方法，意为表明目标状态发生了改变，此方法必须在notifyObservers()之前调用。通过继承Observable来实现一下天气局的类，其源码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Observable</span> <span class="token punctuation">{</span>
@@ -1186,7 +1186,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">20.7k</span>&nbsp;字
+                class="white-color">22.1k</span>&nbsp;字
             
             
             

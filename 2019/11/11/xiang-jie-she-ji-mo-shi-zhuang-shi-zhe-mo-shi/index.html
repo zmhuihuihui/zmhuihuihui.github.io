@@ -4,10 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring之IOC思想, 灰灰灰灰">
-    <meta name="description" content="Spring中的IOCIOC（Inversion of Control），其名称是控制反转，是一种重要的设计思想,实现了程序设计的松耦合。其分为两个部分控制与反转，那么这里就会有两个重要的问题：控制什么？反转什么？
+    <meta name="keywords" content="详解设计模式—装饰者模式, 灰灰灰灰">
+    <meta name="description" content="装饰者模式概述装饰者模式是Gof的23种设计模式之一，在日常的使用中也比较常见。那么何为装饰者模式？通过“装饰”一词大概可以猜出，就是对原有的对象进行装饰。
+装饰者模式概念如下：
 
-控制：指控制对象的生命">
+在不改变原有对象的基础上，将功能附加在对象上
+
+先对装饰者">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Spring之IOC思想 | 灰灰灰灰</title>
+    <title>详解设计模式—装饰者模式 | 灰灰灰灰</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -243,13 +246,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Spring之IOC思想
+                        详解设计模式—装饰者模式
                     </div>
                 </div>
             </div>
@@ -361,12 +364,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Spring/">
-                                <span class="chip bg-color">Spring</span>
-                            </a>
-                        
-                            <a href="/tags/IOC/">
-                                <span class="chip bg-color">IOC</span>
+                            <a href="/tags/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">
+                                <span class="chip bg-color">装饰者模式</span>
                             </a>
                         
                     </div>
@@ -377,8 +376,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Spring/" class="post-category">
-                                Spring
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                设计模式
                             </a>
                         
                     </div>
@@ -389,21 +388,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-18
+                    2019-11-11
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.1k
+                        1.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        5 分
                     </div>
                     
                 
@@ -414,73 +413,164 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Spring中的IOC"><a href="#Spring中的IOC" class="headerlink" title="Spring中的IOC"></a>Spring中的IOC</h2><p>IOC（Inversion of Control），其名称是控制反转，是一种重要的设计思想,实现了程序设计的松耦合。其分为两个部分控制与反转，那么这里就会有两个重要的问题：控制什么？反转什么？</p>
+                <h3 id="装饰者模式概述"><a href="#装饰者模式概述" class="headerlink" title="装饰者模式概述"></a>装饰者模式概述</h3><p>装饰者模式是Gof的23种设计模式之一，在日常的使用中也比较常见。那么何为装饰者模式？通过“装饰”一词大概可以猜出，就是对原有的对象进行装饰。</p>
+<p>装饰者模式概念如下：</p>
+<blockquote>
+<p><strong>在不改变原有对象的基础上，将功能附加在对象上</strong></p>
+</blockquote>
+<p>先对装饰者模式有个大概的概念，接下来通过场景进一步理解。</p>
+<h3 id="场景引入"><a href="#场景引入" class="headerlink" title="场景引入"></a>场景引入</h3><p>这次模仿店家买蛋糕的一个场景，首先店家有一个基础的蛋糕需要销售，其蛋糕实现如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Cake</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//蛋糕的配方</span>
+    <span class="token keyword">public</span> String <span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"蛋糕"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//蛋糕的价格</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+        <span class="token keyword">return</span> <span class="token number">100</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>顾客想买蛋糕时，通过这个蛋糕的getDesc()方法可以知道这个蛋糕有哪些东西，以及通过price()方法可以知道它的价格。而单单只有蛋糕吸引不了顾客，商家应该在蛋糕的基础上添加一些别的东西。如果不使用装饰着模式，一般我们会想到用继承来实现：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CakeWithCream</span> <span class="token keyword">extends</span> <span class="token class-name">Cake</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//在原先蛋糕上加一些奶油</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">" 加一点奶油"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//在原先价格上加20</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">20</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>通过继承可以在蛋糕的基础上加一些奶油，同样也可以在加一些奶油的基础上加一些水果：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CakeWithCreamFruit</span> <span class="token keyword">extends</span> <span class="token class-name">CakeWithCream</span><span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//在原先蛋糕上加一些水果</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">" 加一点水果"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//在原先价格上加30</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">30</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>这样一个完整的蛋糕就出来了，客户可以这样来购买到蛋糕：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Cake cake <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CakeWithCreamFruit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//客户购买蛋糕</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>cake<span class="token punctuation">.</span><span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>cake<span class="token punctuation">.</span><span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p><img src="/2019/11/11/xiang-jie-she-ji-mo-shi-zhuang-shi-zhe-mo-shi/1.png" alt="继承实现购买蛋糕"><br>通过继承的方式，是可以实现装饰的定义——在不改变原有对象的基础上，将功能附加在对象上。但只能在业务简单的情况下实现，一旦业务场景变得复杂，就会出现类爆炸的情况。例如商家想要推出其他配方的蛋糕，有加巧克力的，有加芝士的，有加坚果的…每一个装饰着可以互相组合装饰到蛋糕上。这样就会出现大量的实现类，逻辑复杂，因此通过装饰者模式可以解决这种复杂的业务场景。</p>
+<h3 id="装饰者模式实现"><a href="#装饰者模式实现" class="headerlink" title="装饰者模式实现"></a>装饰者模式实现</h3><p>首先明确装饰对象和被装饰对象。在上述场景中，被装饰对象为Cake，装饰对象为Cream和Fruit。</p>
+<p>然后实现装饰者模式需要有四个重要的特征：</p>
 <ul>
-<li>控制：指控制对象的生命周期。</li>
-<li>反转：指将对象的控制权交由Spring容器处理。</li>
+<li><strong>抽象出被装饰者</strong></li>
+<li><strong>抽象出装饰者接口</strong></li>
+<li><strong>装饰者接口继承被装饰者的抽象类</strong></li>
+<li><strong>装饰者接口组合被装饰者的抽象类，并通过构造器来传入</strong></li>
 </ul>
-<p>现在理解起来可能十分困难，等文章最后我们再来详细聊聊控制反转。现在通过一个例子来引出IOC。</p>
-<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><p>假设现在有这么一个场景，有一个人每天下班都需要开车回家。那么怎么用编程来描述这个事件呢？首先要有定义一辆车。这辆车名叫carA，有四个方法分别为启动、左转、右转、熄火。其结构如下：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CarA</span> <span class="token punctuation">{</span>
-    <span class="token keyword">void</span> <span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>       <span class="token comment" spellcheck="true">//启动</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is starting!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">void</span> <span class="token function">turnLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">//左转</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is turning left!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">void</span> <span class="token function">turnRight</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>   <span class="token comment" spellcheck="true">//右转</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is turning right!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">void</span> <span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token comment" spellcheck="true">//熄火</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"carA is stopping!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<p>对上述场景来逐一分析实现，首先完成被装饰者的部分，只有第一点 <strong>抽象出被装饰者</strong> 是关于被装饰者的，这个实现比较容易理解：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//抽象蛋糕</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractCake</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//蛋糕配方</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> String <span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//蛋糕价格</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">int</span> <span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p>然后需要定义一个人。这个人叫张三，拥有一辆carA车，并且有一个回家的方法。其结构如下：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> CarA carA<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token function">ZhangSan</span><span class="token punctuation">(</span>CarA carA<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>carA <span class="token operator">=</span> carA<span class="token punctuation">;</span>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//具体的蛋糕</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Cake</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractCake</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"蛋糕"</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">goHome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        carA<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        carA<span class="token punctuation">.</span><span class="token function">turnLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        carA<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">100</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>张三离家很近，只需开车启动、左转、熄火就到了。那么每天张三只需要调用goHome()方法就能回到家了。直到有一天，张三凭借着自己的积蓄，买了第二辆车carB。那么同样我们需要定义这么一辆车carB，其结构和carA完全相同，并且需要把ZhangSan类中的所有和车有关的都换成carB。</p>
-<p>这时我们就发现问题了，如果某天张三拥有十辆车了，一天一辆轮着开，那么我们每天都需要频繁的修改ZhangSan类拥有的车及goHome方法，这是十分不合理的。</p>
-<p>这时我们需要明白，其实ZhangSan只需要回家的操作，他本身并不关注开的是什么车。换句话说，他家的保镖只需要在他公司下面停一辆车供张三下班后开回家，张三本身不关心开什么车回家。那么我们就可以进行重构，我们先抽象出这个车,其结构如下：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+<p>这样就在原有的基础上抽象出了蛋糕。接着实现装饰者部分，首先不难理解第二点抽象出装饰者接口，因为装饰对象可能会有很多很多，考虑到可扩展型，应该有一个统一的接口。但这里所要强调的是，此处的抽象出接口是广义上的，并非一定是一个抽象类或接口，只要突出是所有装饰者父类即可。其实现如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//"抽象"出装饰者</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Decorate</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractCake</span><span class="token punctuation">{</span>
 
-    <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">turnLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">turnRight</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> AbstractCake cake<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//组合</span>
 
-<span class="token punctuation">}</span></code></pre>
-<p>接着，ZhangSan类只需要把车改为抽象车，这样就可以实现每天开不同的车（多态）。</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZhangSan</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> Car car<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token function">ZhangSan</span><span class="token punctuation">(</span>Car car<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>car <span class="token operator">=</span> car<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">Decorate</span><span class="token punctuation">(</span>AbstractCake cake<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>cake <span class="token operator">=</span> cake<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">goHome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        car<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        car<span class="token punctuation">.</span><span class="token function">turnLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        car<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> cake<span class="token punctuation">.</span><span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> cake<span class="token punctuation">.</span><span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>此时我们可以在主函数中这样测试。</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        Car car <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CarA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//今天开A车</span>
-        ZhangSan zhangSan <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ZhangSan</span><span class="token punctuation">(</span>car<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        zhangSan<span class="token punctuation">.</span><span class="token function">goHome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>可以看出装饰者既继承了抽象蛋糕又组合了抽象蛋糕。满足了第三点和第四点，具体为什么要这样实现，一会再说。接下来就是具体的装饰对象：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//具体奶油装饰者</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CreamDecorate</span> <span class="token keyword">extends</span> <span class="token class-name">Decorate</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token function">CreamDecorate</span><span class="token punctuation">(</span>AbstractCake cake<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>cake<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> <span class="token string">" 加一点奶油"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> <span class="token number">20</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>这样就可以解决上述的问题，张三今天想开什么车，就new一个车，然后回家，省去了在ZhangSan类中进行修改。但还有问题，张三每天想开不同的车就得new不同的车，他嫌太麻烦。他想可不可以每天公司下面停着自己的所有车，下班想开哪一辆开哪一辆。<br>这时引出了本文的主题IOC。我们可以把对象事先存放在Spring容器中（先把所有车停到公司下面），然后当我们需要某个对象时直接从Spring容器中取（下班后取一辆车）。这样就不用每次频繁的修改源代码new不同的对象了。此时再回过头来谈谈什么是IOC（控制反转）。</p>
-<h3 id="再谈IOC"><a href="#再谈IOC" class="headerlink" title="再谈IOC"></a>再谈IOC</h3><p>控制反转即将对象的控制权交由Spring容器处理。在传统的开发模式下，我们往往会自己new对象，此时对象的控制权在程序员手中，什么时候需要用直接new一个就行。而有了Spring IOC，程序员不需要自己手动new对象，Spring会把所有对象创建好放到了一个容器中，由Spring Bean进行统一管理，程序员想用直接拿就好了。<br>由此可以看出Spring的核心思想控制反转，对象的控制权由程序员转变到了Spring，程序员再也不用关心创建对象的过程，只需要关注对象的使用就行。同样再上述例子中，也可以抽象出Person类，实现不同的人开不同的车回家。</p>
-<p>那么Spring框架是如何实现IOC思想的呢，将在<a href="https://zmhuihuihui.github.io/2019/10/18/spring-zhi-di/" target="_blank" rel="noopener">下一小节</a>详细描述。</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//具体水果装饰者</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FruitDecorate</span> <span class="token keyword">extends</span> <span class="token class-name">Decorate</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token function">FruitDecorate</span><span class="token punctuation">(</span>AbstractCake cake<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>cake<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">" 加一点水果"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">30</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>这时，就完成了基本的装饰者模式，然后来看看顾客如何实现购买的：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        AbstractCake cake <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cake</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//获得基础蛋糕</span>
+        cake <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CreamDecorate</span><span class="token punctuation">(</span>cake<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//加点奶油</span>
+        cake <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CreamDecorate</span><span class="token punctuation">(</span>cake<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//再加点奶油</span>
+        cake <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FruitDecorate</span><span class="token punctuation">(</span>cake<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//加点水果</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>cake<span class="token punctuation">.</span><span class="token function">getDesc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>cake<span class="token punctuation">.</span><span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p><img src="/2019/11/11/xiang-jie-she-ji-mo-shi-zhuang-shi-zhe-mo-shi/2.png" alt="装饰者模式购买蛋糕"><br>可以看到，首先new一个Cake得到基础蛋糕。接着通过构造器传入这个cake，这是组合的目的出来了：<strong>组合里的蛋糕对象其实才是真正的被装饰者</strong>，通过传入新的cake可以不断装饰这个组合对象。</p>
+<p>而继承的目的就是使装饰者是AbstractCake类型，这样可以让cake重新指向这个装饰者拿到那个最终的组合对象，getDesc()和price()实际调用的就是这个组合对象的对应方法。通过这种方式可以不断传入cake来装饰然后返回使cake重新指向，实现不断的装饰组合对象。</p>
+<p>最后看看这个场景下的UML图：<br><img src="/2019/11/11/xiang-jie-she-ji-mo-shi-zhuang-shi-zhe-mo-shi/3.png" alt="装饰者模式UML"><br>上图中可以看出，如果出现新的装饰者，只需要实现抽象出来的装饰者接口就可以了，满足了开闭原则，有较好的可扩展性。</p>
 
             </div>
             <hr/>
@@ -507,7 +597,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2019/10/18/spring-zhi-ioc/">http://yoursite.com/2019/10/18/spring-zhi-ioc/</a>
+                    <a href="http://yoursite.com/2019/11/11/xiang-jie-she-ji-mo-shi-zhuang-shi-zhe-mo-shi/">http://yoursite.com/2019/11/11/xiang-jie-she-ji-mo-shi-zhuang-shi-zhe-mo-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -545,12 +635,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Spring/">
-                                    <span class="chip bg-color">Spring</span>
-                                </a>
-                            
-                                <a href="/tags/IOC/">
-                                    <span class="chip bg-color">IOC</span>
+                                <a href="/tags/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">
+                                    <span class="chip bg-color">装饰者模式</span>
                                 </a>
                             
                         </div>
@@ -849,88 +935,36 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/18/spring-zhi-di/">
+                <a href="/2019/11/11/xiang-jie-she-ji-mo-shi-zhuang-shi-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Spring之DI">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="详解设计模式—装饰者模式">
                         
-                        <span class="card-title">Spring之DI</span>
+                        <span class="card-title">详解设计模式—装饰者模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Dependency Injection（DI）依赖注入，在Spring框架创建对象的过程中，将对象的依赖属性动态的注入到对象中。
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-18
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
-                    </a>
-                    
-                    <a href="/tags/DI/">
-                        <span class="chip bg-color">DI</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/10/18/spring-zhi-ioc/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Spring之IOC思想">
-                        
-                        <span class="card-title">Spring之IOC思想</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Inversion of Control（IOC）是Spring的两大核心思想之一，其不是一种技术，而是一种降低程序耦合的设计思想。
+                            装饰者模式是Gof的23种设计模式之一，在日常的使用中也比较常见。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
                                 </a>
                             
                             
@@ -941,12 +975,57 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
+                    <a href="/tags/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">装饰者模式</span>
                     </a>
                     
-                    <a href="/tags/IOC/">
-                        <span class="chip bg-color">IOC</span>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/28/xiang-jie-she-ji-mo-shi-gong-han-mo-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="详解设计模式—工厂模式">
+                        
+                        <span class="card-title">详解设计模式—工厂模式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            工厂模式分为工厂方法和抽象工厂,其主要功能是将对象的实例化过程抽取出来，目的是为了降低代码的耦合度，增强系统的可扩展性。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">工厂模式</span>
                     </a>
                     
                 </div>
