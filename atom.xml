@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>灰灰灰灰</title>
   
-  <subtitle>面向信仰编程</subtitle>
+  <subtitle>直觉艺术</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-11T13:33:52.902Z</updated>
+  <updated>2020-02-08T06:15:32.461Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,61 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>详解Java中的代理</title>
+    <link href="http://yoursite.com/2020/02/05/xiang-jie-java-zhong-de-dai-li/"/>
+    <id>http://yoursite.com/2020/02/05/xiang-jie-java-zhong-de-dai-li/</id>
+    <published>2020-02-05T03:19:03.000Z</published>
+    <updated>2020-02-08T06:15:32.461Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;代理（Proxy）是通过代理对象访问目标对象，可以在目标对象基础上增强额外的功能，如添加权限，访问控制和审计等功能。代理分为静态代理和动态代理，动态代理又分为JDK代理和CGLib代理。&lt;/p&gt;
+&lt;h2 id=&quot;静态代理&quot;&gt;&lt;a href=&quot;#静态代理&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="代理" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>详解Java中的Synchronized原理</title>
+    <link href="http://yoursite.com/2020/01/03/xiang-jie-java-zhong-de-synchronized-yuan-li/"/>
+    <id>http://yoursite.com/2020/01/03/xiang-jie-java-zhong-de-synchronized-yuan-li/</id>
+    <published>2020-01-03T07:23:06.000Z</published>
+    <updated>2020-02-05T13:45:17.745Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;Synchronized的基本使用&quot;&gt;&lt;a href=&quot;#Synchronized的基本使用&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="Synchronized" scheme="http://yoursite.com/tags/Synchronized/"/>
+    
+  </entry>
   
   <entry>
     <title>详解设计模式—装饰者模式</title>
@@ -212,7 +267,7 @@
     <link href="http://yoursite.com/2019/10/19/xiang-jie-she-ji-mo-shi-guan-cha-zhe-mo-shi/"/>
     <id>http://yoursite.com/2019/10/19/xiang-jie-she-ji-mo-shi-guan-cha-zhe-mo-shi/</id>
     <published>2019-10-19T03:04:38.000Z</published>
-    <updated>2019-12-01T07:35:29.703Z</updated>
+    <updated>2020-01-03T07:26:03.797Z</updated>
     
     <summary type="html">
     
