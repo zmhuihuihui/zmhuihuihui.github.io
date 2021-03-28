@@ -1,4 +1,4 @@
 # zmhuihuihui.github.io
 hexo
 
-[www.zmhuihuihui.com](www.zmhuihuihui.com)
+[https://zmhuihuihui.com/](https://zmhuihuihui.com/)
